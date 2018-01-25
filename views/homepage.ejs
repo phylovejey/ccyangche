@@ -31,32 +31,6 @@
   </div>
 </div>
 <script type="text/javascript" src="/js/jquery.min.js"></script>
-<script type="text/javascript">
-    $('#btn').on('click', function(){
-      var username = $('#username').val();
-      var password = $('#password').val();
-      var obj = {
-        username: username,
-        password: password
-      };
-      $.ajax({
-        type: 'POST',
-        url: '/login',
-        data: obj,
-        success: function(data){
-          console.log(data)
-          if(data.status){
-            alert('登录成功');
-          }else{
-            alert('登录失败');
-          }
-        },
-        error: function(){
-          alert('登录失败');
-        },
-        dataType: 'json'
-      });
-    });
-</script>
+<script type="text/javascript" src="/js/login.js"></script>
 </body>
 </html>

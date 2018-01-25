@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var app = express();
 var http = require('http');
 var homepage = require('./routes/homepage');
+var maixiandb = require('./db/maixiandb');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -38,6 +39,8 @@ app.use(function(err, req, res, next) {
   //res.render('error');
 });
 
+//connect database
+maixiandb.connectdb();
 /**
  * Create HTTP server.
  */
