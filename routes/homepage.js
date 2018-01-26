@@ -36,8 +36,9 @@ router.post('/login', function(req, res, next){
 
 //登录成功
 router.get("/item", function(req, res, nex){
-    console.log("登录成功 ", req.body.test1);
-    console.log("登录成功 ", req.body.test2);
+    if(!req.cookies.user){
+        return res.render('homepage',{});
+    }
     res.render('editItem', { title: '商品编辑' });
 });
 
