@@ -5,7 +5,7 @@ var maixiandb = require('../db/maixiandb');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("GET home page.");
-  res.render('login', { title: '首页' });
+    res.render('login', { title: '买鲜后台管理系统' });
 });
 
 //登录接口
@@ -40,8 +40,8 @@ router.post('/login', function(req, res, next){
                 }
                 else
                 {
+                    res.cookie('user',user[0]);
                     result.info = "登录成功";
-                    res.cookie('user',username);    
                 }
             }
         }

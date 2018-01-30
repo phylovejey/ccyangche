@@ -13,8 +13,7 @@ $('#btn').on('click', function(){
       console.log(data)
       if(data.status)
       {
-        alert('登录成功');
-        window.location.href = '/item';
+        window.location.href = '/admin';
       }
       else
       {
