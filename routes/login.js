@@ -5,32 +5,47 @@ var maixiandb = require('../db/maixiandb');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("GET home page.");
-  res.render('homepage', { title: '首页' });
+  res.render('login', { title: '首页' });
 });
 
 //登录接口
 router.post('/login', function(req, res, next){
-    //用户名、密码、验证码
+    //用户名、密码
     var username = req.body.username;
     var password = req.body.password;
 
-    console.log("username: " + username);
-    console.log("password: " + password);
-    //TODO ：对用户名、密码进行校验
-    //xss处理、判空
-
-    //密码加密 md5(md5(password + '随机字符串'))
-    //密码需要加密－> 可以写入JSON文件
-    if(username === 'admin' && password === '123456'){
-        res.cookie('user',username);
-        return res.send({
-            status: 1
-        });
-    }
-
-    return res.send({
-        status: 0,
-        info: '登录失败'
+    maixiandb.findData('user', {name:username}, function(result){
+        if(result.status == 0)
+        {
+            console.log("查询失败: ", result.info);
+        }
+        else
+        {
+            var user = result.info;
+            if(user.length == 0)
+            {
+                console.log("登录失败: 用户名不存在");
+                result.status = 0;
+                result.errortype = 0;
+                result.info = "用户名不存在"; 
+            }
+            else
+            {
+                if(user[0].password !== password)
+                {
+                    console.log("登录失败: 密码错误");
+                    result.status = 0;
+                    result.errortype = 1;
+                    result.info = "密码错误";   
+                }
+                else
+                {
+                    result.info = "登录成功";
+                    res.cookie('user',username);    
+                }
+            }
+        }
+        return res.send(result);
     });
 });
 

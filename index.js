@@ -6,7 +6,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var http = require('http');
-var homepage = require('./routes/homepage');
+var login = require('./routes/login');
 var maixiandb = require('./db/maixiandb');
 
 // view engine setup
@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', homepage);
+app.use('/', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

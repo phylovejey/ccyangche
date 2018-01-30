@@ -16,23 +16,31 @@ maixiandb.connectdb = function(){
 	});
 }
 
-maixiandb.findData = function(){
+maixiandb.findData = function(table, data, callback){
+    var collection = maixiandb.db.collection(table);
 
+    //插入数据
+    collection.find(data).toArray(function(err, result){ 
+        if(err)
+        {
+	    	callback({status:0,
+	    				info:err.tostring()});
+            return;
+        }
+	    callback({status:1,
+	    		  info:result});
+    });
 };
 
 maixiandb.insertData = function(table, data, callback) {
-	console.log("data ", data); 
-	console.log("table ", table); 
     var collection = maixiandb.db.collection(table);
-	console.log("collection ", collection); 
-
+ 
     //插入数据
     collection.insert(data, function(err, result) { 
         if(err)
         {
 	    	callback({status:0,
 	    				info:err.tostring()});
-            //console.log('Error:'+ err);
             return;
         }
 	    callback({status:1});
