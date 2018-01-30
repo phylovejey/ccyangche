@@ -10,10 +10,9 @@ $('#btn').on('click', function(){
     url: '/login',
     data: obj,
     success: function(data){
-      console.log(data)
       if(data.status)
       {
-        window.location.href = '/admin';
+        window.location.href = data.url;
       }
       else
       {

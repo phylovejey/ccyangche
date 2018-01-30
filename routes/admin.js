@@ -4,18 +4,20 @@ var maixiandb = require('../db/maixiandb');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    if(!req.cookies.user){
+    if(!req.cookies.user || req.cookies.user.identity != 0){
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    if(req.cookies.user.identity === 1)
-    {
-        return res.render('adhomepage',{ title: '管理员' });
+    return res.render('adhomepage',{ name:req.cookies.user.name});
+});
+
+//代理管理
+router.get('/intro', function(req, res, next) {
+    if(!req.cookies.user || req.cookies.user.identity != 0){
+        res.render('login', { title: '买鲜后台管理系统' });
     }
-    else
-    {
-       return res.render('error'); 
-    }
+
+    return res.render('editIntro',{ name:req.cookies.user.name});
 });
 
 //登录成功

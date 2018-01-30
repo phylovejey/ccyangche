@@ -42,6 +42,10 @@ router.post('/login', function(req, res, next){
                 {
                     res.cookie('user',user[0]);
                     result.info = "登录成功";
+                    if(user[0].identity == 0)
+                    {
+                        result.url = '/admin';
+                    }
                 }
             }
         }
