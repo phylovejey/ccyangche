@@ -20,6 +20,23 @@ router.get('/intro', function(req, res, next) {
     return res.render('editIntro',{ name:req.cookies.user.name});
 });
 
+//增加代理
+router.post('/intro', function(req, res, next){
+    if(!req.cookies.user || req.cookies.user.identity != 0){
+        res.render('login', { title: '买鲜后台管理系统' });
+    }
+    
+    var intro = req.body;
+    console.log("phy ", intro);
+    maixiandb.insertData('user', intro, function(result){
+        if(result.status == 0)
+        {
+            console.log("增加代理失败");
+        }
+        return res.send(result);     
+    });
+});
+
 //登录成功
 router.get("/item", function(req, res, nex){
     if(!req.cookies.user){
