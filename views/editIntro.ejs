@@ -7,9 +7,12 @@
     .header{height:40px;width:100%;background-color:#242424;}
     .header_title{line-height:40px;margin-left:60px;color:#fff;font-size:15px;}
     .header_user{font-size:12px;margin-left:20px;color:#ccc;}
-    .container{width:400px;text-align:center;background-color:#ccc;margin:auto;margin-top:30px;}
-    .container_func{margin-right:8px;width:100px;}
-    .add_info{margin:auto;margin-top:30px;display:none}
+    .container{width:400px;text-align:center;margin:auto;margin-top:30px;}
+    .container_func{width:200px;float:left;background-color:#ccc;}
+    .add_info{width:800px;margin:auto;margin-top:30px;clear:left;}
+    .add_btn{width:100px;height:30px;margin-top: 10px;margin-left: 350px;margin-right: 350px;}
+    .query_block{width:800px;margin:auto;margin-top:30px;clear: left;display: none;}
+    .query_block input{}
     </style>
   </head>
 
@@ -19,8 +22,8 @@
     </div>
 
     <div class="container">
-      <div class="container_func" id = "modify">123</div>
-      <div class="container_func" id = "add">456</div>
+      <div class="container_func" id = "modify">修改</div>
+      <div class="container_func" id = "add">新增</div>
     </div>
     
     <div class="add_info">
@@ -34,10 +37,13 @@
         <span> 介绍人 </span><input id="intro_phonenumber" type="text" placeholder="请输入介绍人的手机号"/>
         <span>代理区域 </span><input id="location" type="text" placeholder="代理的大致区域"/>
       </div>
+      <div>
+        <button class ="add_btn" type="button" id="addbtn">增加</button>
+      </div>
     </div>
     
-    <div>
-        <input id="query" type="text"/><span> 查询 </span>
+    <div class="query_block">
+        <input id="query" type="text"/><button type="button">查询</button>
     </div>
 
     <script type="text/javascript" src="/js/jquery.min.js"></script>
