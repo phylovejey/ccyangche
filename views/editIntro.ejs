@@ -8,7 +8,7 @@
     .header_title{line-height:40px;margin-left:60px;color:#fff;font-size:15px;}
     .header_user{font-size:12px;margin-left:20px;color:#ccc;}
     .container{width:400px;text-align:center;margin:auto;margin-top:30px;}
-    .container_func{width:200px;float:left;background-color:#ccc;}
+    .container_func{width:200px;float:left;}
     .add_info{width:800px;margin:auto;margin-top:30px;clear:left;}
     .add_btn{width:100px;height:30px;margin-top: 10px;margin-left: 350px;margin-right: 350px;}
     .query_block{width:800px;margin:auto;margin-top:30px;clear: left;display: none;}
@@ -22,11 +22,11 @@
     </div>
 
     <div class="container">
-      <div class="container_func" id = "modify">修改</div>
-      <div class="container_func" id = "add">新增</div>
+      <div class="container_func" id="modify" style="background-color:#fff;">修改</div>
+      <div class="container_func" id="add" style="background-color:#ccc;">新增</div>
     </div>
     
-    <div class="add_info">
+    <div class="add_info" id="addinfo">
       <div>
         <span>真实姓名 </span><input id="realname" type="text" placeholder="真实姓名"/>
         <span>手机号 </span><input id="phonenumber" type="text" placeholder="手机号"/>
@@ -42,7 +42,7 @@
       </div>
     </div>
     
-    <div class="query_block">
+    <div class="query_block" id="queryblock">
         <input id="query" type="text"/><button type="button">查询</button>
     </div>
 
