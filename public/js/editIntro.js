@@ -1,14 +1,18 @@
 $('#modify').on('click', function(){
-    document.getElementById('add').innerHTML = "789";
+    document.getElementById('queryblock').style.display="block";
+    document.getElementById('addinfo').style.display="none";
+    document.getElementById('add').style.backgroundColor="#fff";
+    document.getElementById('modify').style.backgroundColor="#ccc";
 });
 
 $('#add').on('click', function(){
-    document.getElementById('modify').innerHTML = "123";
+    document.getElementById('queryblock').style.display="none";
+    document.getElementById('addinfo').style.display="block";
+    document.getElementById('add').style.backgroundColor="#ccc";
+    document.getElementById('modify').style.backgroundColor="#fff";
 });
 
 $('#addbtn').click(function(){
-  document.getElementById('modify').innerHTML = "123";
-
 	var realname = $('#realname').val();
   	var phonenumber = $('#phonenumber').val();
   	var name = $('#name').val();
