@@ -96,6 +96,11 @@ function showResult(result)
     table.rows[i+1].insertCell(3); 
     table.rows[i+1].cells[3].appendChild(document.createTextNode(result[i].phonenumber));     
     table.rows[i+1].insertCell(4); 
-    table.rows[i+1].cells[4].appendChild(document.createTextNode(result[i].location)); 
+    table.rows[i+1].cells[4].appendChild(document.createTextNode(result[i].location));
+    //创建input 元素
+    var input = document.createElement("<input type=\"checkbox\">");
+    //input.id = "check_" + i;
+    table.rows[i+1].insertCell(5); 
+    table.rows[i+1].cells[5].appendChild(input); 
   }
 }
