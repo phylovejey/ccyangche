@@ -16,10 +16,25 @@ maixiandb.connectdb = function(){
 	});
 }
 
+maixiandb.deleteData = function(table, data, callback){
+    var collection = maixiandb.db.collection(table);
+
+    //删除数据
+    collection.remove(data, 1, function(err, result){
+    	if(err)
+    	{
+    		console.log("phy deleteData ", err);
+    		callback({status:0, info:err.tostring()});
+    		return;
+    	}
+    	callback({status:1});
+    });
+};
+
 maixiandb.findData = function(table, data, callback){
     var collection = maixiandb.db.collection(table);
 
-    //插入数据
+    //查询数据
     collection.find(data).toArray(function(err, result){ 
         if(err)
         {
