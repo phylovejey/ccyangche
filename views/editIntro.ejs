@@ -12,7 +12,6 @@
     .add_info{width:800px;margin:auto;margin-top:30px;clear:left;}
     .add_btn{width:100px;height:30px;margin-top: 10px;margin-left: 350px;margin-right: 350px;}
     .query_block{width:800px;margin:auto;margin-top:30px;clear: left;display: none;}
-    .query_block input{}
     </style>
   </head>
 
@@ -43,9 +42,20 @@
     </div>
     
     <div class="query_block" id="queryblock">
-        <input id="query" type="text"/><button type="button">查询</button>
+        <input id="query" type="text"/><button id="querybtn" type="button">查询</button>
+        <div>
+          <table id="queryresult">
+            <tr style="text-align:center;font-size:15px;height:30px;color:#fff;background-color:#36A0FB;border:0;">
+              <td style="width:160px">用户名</td>
+              <td style="width:160px">姓名</td>
+              <td style="width:160px">手机号</td>
+              <td style="width:160px">介绍人姓名</td>
+              <td style="width:160px">代理区域</td>
+            </tr>
+          </table>
+        </div>
     </div>
-
+  
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/editIntro.js"></script>
   </body>
