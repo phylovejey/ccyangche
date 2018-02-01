@@ -26,15 +26,50 @@ router.post('/intro', function(req, res, next){
         res.render('login', { title: '买鲜后台管理系统' });
     }
     
-    var intro = req.body;
-    console.log("phy ", intro);
-    maixiandb.insertData('user', intro, function(result){
-        if(result.status == 0)
+    console.log("phy ", req.body);
+    if(req.body.opera === 'add')
+    {
+        var introducer = 0;
+        if(req.body.intro_phonenumber !== "")
         {
-            console.log("增加代理失败");
+            maixiandb.findData('user', {phonenumber:req.body.intro_phonenumber}, function(result){
+                if(result.status == 1 && result.info.length > 0)
+                {
+                    introducer = result.info[0].name;
+                }
+            });
         }
-        return res.send(result);     
-    });
+        var agent = {
+            name:req.body.name,
+            password:req.body.password,
+            authority:1,
+            des:"代理商",
+            introducer:introducer,
+            identity:1,
+            realname:req.body.realname,
+            phonenumber:req.body.phonenumber,
+            location:req.body.location
+        }
+
+        maixiandb.insertData('user', agent, function(result){
+            if(result.status == 0)
+            {
+                console.log("增加代理失败");
+            }
+            return res.send(result);     
+        });
+    }
+    else if(req.body.opera === 'query')
+    {
+        maixiandb.findData('user', {phonenumber:req.body.query,identity:1}, function(result){
+            console.log("phy query ", result);
+            return res.send(result);
+        });
+    }
+    else if(req.body.opera === 'modify')
+    {
+
+    }
 });
 
 //登录成功
