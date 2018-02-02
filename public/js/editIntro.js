@@ -66,7 +66,7 @@ $('#querybtn').click(function(){
     success: function(data){
       if(data.status)
       {
-        
+        showResult(data.info);
       }
       else
       {
@@ -87,7 +87,7 @@ function deleteAgent()
 
   var obj = {
       opera:"delete",
-      key:select,
+      key:select
     }
 
     $.ajax({
@@ -151,7 +151,7 @@ function showResult(result)
     //创建input 元素
     var input = document.createElement("input");
     input.type = "checkbox";
-    input.id = result[i].name;
+    input.id = result[i]._id;
     input.onclick = checked;
     table.rows[i+1].insertCell(5); 
     table.rows[i+1].cells[5].appendChild(input); 
@@ -160,5 +160,14 @@ function showResult(result)
 
 function deleteRow(table, key)
 {
-
+  var table = document.getElementById('queryresult');
+  var childs = table.childNodes;
+  for(var i = childs.length - 1; i >= 0; i--) 
+  {
+    if(childs[i].id == key) 
+    {
+      table.removeChild(childs[i]); 
+      break;
+    }
+  } 
 }
