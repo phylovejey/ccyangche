@@ -66,7 +66,7 @@ $('#querybtn').click(function(){
     success: function(data){
       if(data.status)
       {
-        showResult(data.info);
+        
       }
       else
       {
@@ -80,6 +80,56 @@ $('#querybtn').click(function(){
   });
 });
 
+function deleteAgent()
+{
+  if(select == "")
+    return;
+
+  var obj = {
+      opera:"delete",
+      key:select,
+    }
+
+    $.ajax({
+    type: 'POST',
+    url: '/admin/intro',
+    data: obj,
+    success: function(data){
+      if(data.status)
+      {
+        showResult(data.info);
+      }
+      else
+      {
+        alert(data.info);
+      }
+    },
+    error: function(){
+      alert(data.info);
+    },
+    dataType: 'json'
+  });
+}
+
+function checked()
+{
+  if(this.checked)
+  {
+    select = this.id;
+    if(selectItem != null && selectItem != this)
+      selectItem.checked = false;
+    selectItem = this;
+  }
+  else
+  {
+    select = "";
+    selectItem = null;
+  }
+}
+
+var select = "";
+var selectItem = null;
+
 function showResult(result)
 {
   var table = document.getElementById('queryresult');
@@ -92,15 +142,23 @@ function showResult(result)
     table.rows[i+1].insertCell(1); 
     table.rows[i+1].cells[1].appendChild(document.createTextNode(result[i].realname)); 
     table.rows[i+1].insertCell(2); 
-    table.rows[i+1].cells[2].appendChild(document.createTextNode(result[i].phonenumber));     
+    table.rows[i+1].cells[2].appendChild(document.createTextNode(result[i].phonenumber));  
     table.rows[i+1].insertCell(3); 
     table.rows[i+1].cells[3].appendChild(document.createTextNode(result[i].phonenumber));     
     table.rows[i+1].insertCell(4); 
     table.rows[i+1].cells[4].appendChild(document.createTextNode(result[i].location));
+
     //创建input 元素
-    var input = document.createElement("<input type=\"checkbox\">");
-    //input.id = "check_" + i;
+    var input = document.createElement("input");
+    input.type = "checkbox";
+    input.id = result[i].name;
+    input.onclick = checked;
     table.rows[i+1].insertCell(5); 
     table.rows[i+1].cells[5].appendChild(input); 
   }
+}
+
+function deleteRow(table, key)
+{
+
 }
