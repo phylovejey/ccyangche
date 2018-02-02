@@ -97,7 +97,7 @@ function deleteAgent()
     success: function(data){
       if(data.status)
       {
-        showResult(data.info);
+        deleteRow("queryresult", data.key);
       }
       else
       {
