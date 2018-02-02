@@ -27,6 +27,7 @@ maixiandb.deleteData = function(table, data, callback){
     		callback({status:0, info:err.tostring()});
     		return;
     	}
+    	console.log("phy deleteData ", result);
     	callback({status:1});
     });
 };
