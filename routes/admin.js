@@ -66,6 +66,16 @@ router.post('/intro', function(req, res, next){
             return res.send(result);
         });
     }
+    else if(req.body.opera === 'delete')
+    {
+        maixiandb.deleteData('user', {name:req.body.key,identity:1}, function(result){
+            if(result.status == 0)
+            {
+                console.log("删除代理失败");
+            }
+            return res.send(result);     
+        });
+    }
     else if(req.body.opera === 'modify')
     {
 
