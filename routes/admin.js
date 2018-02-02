@@ -68,7 +68,8 @@ router.post('/intro', function(req, res, next){
     }
     else if(req.body.opera === 'delete')
     {
-        maixiandb.deleteData('user', {name:req.body.key,identity:1}, function(result){
+        console.log("phy del ", parseInt(req.body.key, 16));
+        maixiandb.deleteData('user', {_id:parseInt(req.body.key, 16),identity:1}, function(result){
             if(result.status == 0)
             {
                 console.log("删除代理失败");
