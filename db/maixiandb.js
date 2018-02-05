@@ -23,12 +23,10 @@ maixiandb.deleteData = function(table, data, callback){
     collection.remove(data, 1, function(err, result){
     	if(err)
     	{
-    		console.log("phy deleteData ", err);
     		callback({status:0, info:err.tostring()});
     		return;
     	}
-    	console.log("phy deleteData ", result);
-    	callback({status:1});
+    	callback({status:1,info:data});
     });
 };
 
