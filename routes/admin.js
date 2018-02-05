@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var maixiandb = require('../db/maixiandb');
+var ObjectID = require('mongodb').ObjectID;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -25,8 +26,7 @@ router.post('/intro', function(req, res, next){
     if(!req.cookies.user || req.cookies.user.identity != 0){
         res.render('login', { title: '买鲜后台管理系统' });
     }
-    
-    console.log("phy ", req.body);
+
     if(req.body.opera === 'add')
     {
         var introducer = 0;
@@ -62,14 +62,12 @@ router.post('/intro', function(req, res, next){
     else if(req.body.opera === 'query')
     {
         maixiandb.findData('user', {phonenumber:req.body.query,identity:1}, function(result){
-            console.log("phy query ", result);
             return res.send(result);
         });
     }
     else if(req.body.opera === 'delete')
     {
-        console.log("phy del ", parseInt(req.body.key, 16));
-        maixiandb.deleteData('user', {_id:parseInt(req.body.key, 16),identity:1}, function(result){
+        maixiandb.deleteData('user', {_id:ObjectID(req.body.key),identity:1}, function(result){
             if(result.status == 0)
             {
                 console.log("删除代理失败");
