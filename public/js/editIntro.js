@@ -97,7 +97,7 @@ function deleteAgent()
     success: function(data){
       if(data.status)
       {
-        deleteRow("queryresult", data.key);
+        deleteRow("queryresult", data.info);
       }
       else
       {
@@ -136,7 +136,9 @@ function showResult(result)
 
   for (var i = 0; i < result.length; i++) 
   {
-    table.insertRow(i+1);
+    var row = table.insertRow(i+1);
+    row.id = result[i]._id;
+
     table.rows[i+1].insertCell(0); 
     table.rows[i+1].cells[0].appendChild(document.createTextNode(result[i].name)); 
     table.rows[i+1].insertCell(1); 
@@ -162,12 +164,13 @@ function deleteRow(table, key)
 {
   var table = document.getElementById('queryresult');
   var childs = table.childNodes;
+
   for(var i = childs.length - 1; i >= 0; i--) 
   {
-    if(childs[i].id == key) 
+    if(table.rows[i].id == key._id)
     {
-      table.removeChild(childs[i]); 
+      table.deleteRow(i);
       break;
     }
-  } 
+  }
 }
