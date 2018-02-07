@@ -1,10 +1,14 @@
-$('#btn').on('click', function(){
+function login()
+{
   var username = $('#username').val();
   var password = $('#password').val();
-  var obj = {
+
+  var obj = 
+  {
     username: username,
     password: password
   };
+
   $.ajax({
     type: 'POST',
     url: '/login',
@@ -16,20 +20,7 @@ $('#btn').on('click', function(){
       }
       else
       {
-        if(data.errortype == 0)
-        {
-          document.getElementById('error_username').innerHTML = data.info;
-          document.getElementById('error_password').innerHTML = "";
-        }
-        else if(data.errortype == 1)
-        {
-          document.getElementById('error_username').innerHTML = "";
-          document.getElementById('error_password').innerHTML = data.info;
-        }
-        else
-        {
-          alert(data.info);
-        }
+        alert(data.info);
       }
     },
     error: function(){
@@ -37,4 +28,4 @@ $('#btn').on('click', function(){
     },
     dataType: 'json'
   });
-});
+}
