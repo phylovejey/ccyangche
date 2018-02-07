@@ -14,6 +14,8 @@ router.post('/login', function(req, res, next){
     var username = req.body.username;
     var password = req.body.password;
 
+    console.log("phy login ", req.body);
+    
     maixiandb.findData('user', {name:username}, function(result){
         if(result.status == 0)
         {
