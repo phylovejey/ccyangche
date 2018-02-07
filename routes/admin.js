@@ -86,7 +86,7 @@ router.get("/item", function(req, res, nex){
     if(!req.cookies.user){
         return res.render('homepage',{});
     }
-    res.render('editItem', { title: '商品编辑' });
+    res.render('editItem', { name:req.cookies.user.name});
 });
 
 //插入数据
