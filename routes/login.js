@@ -4,7 +4,7 @@ var maixiandb = require('../db/maixiandb');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    console.log("GET home page.");
+    console.log("GET Login Page.");
     res.render('login', { title: '买鲜后台管理系统' });
 });
 

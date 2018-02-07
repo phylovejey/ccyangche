@@ -3,13 +3,19 @@ var router = express.Router();
 var maixiandb = require('../db/maixiandb');
 var ObjectID = require('mongodb').ObjectID;
 
-/* GET home page. */
+/* GET Index page. */
 router.get('/', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    return res.render('adhomepage',{ name:req.cookies.user.name});
+    console.log("Get Index page ", req.body);
+    var data = 
+    {
+        zonglan:"/admin"
+    }
+
+    return res.render('index',data);
 });
 
 //代理管理
