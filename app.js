@@ -11,6 +11,7 @@ var login = require('./routes/login');
 var admin = require('./routes/admin');
 var item = require('./routes/item');
 var agent = require('./routes/agent');
+var order = require('./routes/order');
 var maixiandb = require('./db/maixiandb');
 
 // view engine setup
@@ -27,6 +28,7 @@ app.use('/', login);
 app.use('/admin', admin);
 app.use('/item', item);
 app.use('/agent', agent);
+app.use('/order', order);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
