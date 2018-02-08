@@ -34,7 +34,8 @@
         				<ul class="nav" id="side-menu">
         					<li><a href=<%= zonglan %>><i class="fa fa-dashboard fa-fw nav_icon"></i>总览</a></li>
         					<li><a href="/item"><i class="fa fa-laptop nav_icon"></i>商品管理</a></li>
-        					<li><a href="#"><i class="fa fa-indent nav_icon"></i>代理管理</a></li>
+                            <li><a href="/agent"><i class="fa fa-indent nav_icon"></i>代理管理</a></li>
+        					<li><a href="#"><i class="fa fa-indent nav_icon"></i>订单管理</a></li>
         					<li>
         						<a href="#"><i class="fa fa-envelope nav_icon"></i>活动管理<span class="fa arrow"></span></a>
         						<ul class="nav nav-second-level">
@@ -149,6 +150,14 @@
                                     <label class="control-label">点赞数</label>
                                     <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
                                 </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品实际库存</label>
+                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品显示库存</label>
+                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
+                                </div>
                                 <div class="form-group filled">
                                     <label class="control-label">商品分类</label>
                                     <select class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
@@ -159,8 +168,8 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                    <button type="reset" class="btn btn-default">Reset</button>
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                    <button type="reset" class="btn btn-default">清空</button>
                                 </div>
                             </fieldset>
                         </form>
