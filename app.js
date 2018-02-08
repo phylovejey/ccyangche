@@ -9,6 +9,7 @@ var app = express();
 var http = require('http');
 var login = require('./routes/login');
 var admin = require('./routes/admin');
+var item = require('./routes/item');
 var maixiandb = require('./db/maixiandb');
 
 // view engine setup
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
 app.use('/admin', admin);
+app.use('/item', item);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
