@@ -43,11 +43,11 @@ router.post('/login', function(req, res, next){
                 else
                 {
                     res.cookie('user',user[0]);
-                    result.info = "登录成功";
-                    if(user[0].identity == 0)
+                    var data = 
                     {
-                        result.url = '/admin';
+                        zonglan:"/admin"
                     }
+                    return res.render('index',data);
                 }
             }
         }
