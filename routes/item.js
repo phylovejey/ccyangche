@@ -24,7 +24,7 @@ router.post('/', function(req, res, next){
     console.log("插入数据！", req.body);
     var itemresult = globalitem.packageItem(req.body);
     if(itemresult.error === ""){
-        //maixiandb.insertData('item', itemresult.item, function(result){
+        maixiandb.insertData('item', itemresult.item, function(result){
             if(result == 0)
             {
                 console.log("插入失败");
