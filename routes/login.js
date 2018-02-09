@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 //登录接口
-router.post('/login', function(req, res, next){
+router.post('/', function(req, res, next){
     //用户名、密码
     var username = req.body.username;
     var password = req.body.password;
