@@ -13,7 +13,8 @@
 	    <link href="/css/font-awesome.css" rel="stylesheet"> 
 	    <!-- jQuery -->
         <script src="/js/jquery.min.js"></script>
-	    <script src="/js/jquery.form.js"></script>
+        <script src="/js/jquery.form.js"></script>
+	    <script src="/js/formcallback.js"></script>
 	    <!-- Bootstrap Core JavaScript -->
 	    <script src="/js/bootstrap.min.js"></script>
     </head>
@@ -66,7 +67,7 @@
             		<div class="xs">
             			<h3>商品信息</h3>
             			<div class="well1 white">
-            			<form action='/item' method='post' class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
+            			<form action='/item' method='post' id="itemform" class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
 							<fieldset>
 								<div class="form-group">
 									<label class="control-label">商品名称</label>
