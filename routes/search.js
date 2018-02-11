@@ -24,17 +24,18 @@ router.post('/', function(req, res, next){
     }
 
     console.log("Get Search body ", req.body);
-    /*if(req.body.target === "item"){
-    	globalitem.findItem({itemname:req.body.key}, function(result){
-            return res.send(result);
-    	});
+    if(req.body.target === "item"){
+        res.render('search',{zonglan:"/admin"});
+    	/*globalitem.findItem({itemname:req.body.key}, function(result){
+            return res.render('search',{zonglan:"/admin"});
+    	});*/
     }
     else if(req.body.target === "agent"){
 
     }
     else if(req.body.target === "oder"){
     	
-    }*/
+    }
 });
 
 module.exports = router;
