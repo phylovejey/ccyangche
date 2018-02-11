@@ -8,13 +8,11 @@ $(document).ready(function() {
 	});            
 });
 
-/*function searchitem(){
-	$("#btnsearchitem").innerHTMl = "phy";
-}*/
-/*$("#btnsearchitem").click(function(){
+$("#btnsearchitem").click(function(){
 
 
 	$("#btnsearchitem").innerHTMl = "phy";
+	
 
 	  	/*var obj = {
 		target:"item",
@@ -29,4 +27,4 @@ $(document).ready(function() {
 		error:function(result){
 		}
 	});*/
-});*/
+});
