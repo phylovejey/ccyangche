@@ -27,9 +27,10 @@
     				<a class="navbar-brand">买鲜后台管理系统</a>
     			</div>
 
-      			<form class="navbar-form navbar-right">
-      				<input type="text" class="form-control" value="Search..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search...';}">
-        		</form>
+      			<div class="navbar-form navbar-right">
+      				<input type="text" id="search" class="form-control" placeholder="请输入商品名称" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                    <button type="button" id="btnsearchitem" class="btn btn-primary">搜索</button>
+        		</div>
 
         		<div class="navbar-default sidebar" role="navigation">
         			<div class="sidebar-nav navbar-collapse">
