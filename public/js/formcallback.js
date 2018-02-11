@@ -5,26 +5,28 @@ $(document).ready(function() {
 		}else{
 			alert("增加商品成功");
 		}
-	});            
+	});  
 });
 
-$("#btnsearchitem").click(function(){
-
-
-	$("#btnsearchitem").innerHTMl = "phy";
-	
-
-	  	/*var obj = {
+function mxsearchitem()
+{
+	var obj = {
 		target:"item",
-		key:$("#search").val();
+		key:$("#search").val()
 	}
 	$.ajax({
 		url : "/search",
-		type : "GET",
+		type : "POST",
 		data : obj,
 		success : function(result){
+			if(result.status == 0){
+				alert(result.error);
+			}else{
+				alert(result.info[0].itemname);
+			}
 		},
 		error:function(result){
+			alert(result);
 		}
-	});*/
-});
+	});
+}
