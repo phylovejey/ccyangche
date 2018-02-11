@@ -23,7 +23,8 @@ router.post('/', function(req, res, next){
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    if(req.body.target === "item"){
+    console.log("Get Search body ", req.body);
+    /*if(req.body.target === "item"){
     	globalitem.findItem({itemname:req.body.key}, function(result){
             return res.send(result);
     	});
@@ -33,7 +34,7 @@ router.post('/', function(req, res, next){
     }
     else if(req.body.target === "oder"){
     	
-    }
+    }*/
 });
 
 module.exports = router;
