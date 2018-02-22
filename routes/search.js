@@ -8,7 +8,6 @@ router.get('/', function(req, res, next) {
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    console.log("Get Search page ", req.body);
     var data = 
     {
         zonglan:"/admin"
@@ -24,16 +23,15 @@ router.post('/', function(req, res, next){
     }
 
     console.log("Get Search body ", req.body);
-    if(req.body.target === "item"){
-        res.render('search',{zonglan:"/admin"});
-    	/*globalitem.findItem({itemname:req.body.key}, function(result){
-            return res.render('search',{zonglan:"/admin"});
-    	});*/
+    if(req.body.target === '1'){
+    	globalitem.findItem({itemname:{$regex:req.body.key}}, function(result){
+            return res.send({target:1,result:result});
+    	});
     }
-    else if(req.body.target === "agent"){
+    else if(req.body.target === '2'){
 
     }
-    else if(req.body.target === "oder"){
+    else if(req.body.target === '3'){
     	
     }
 });
