@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var globalitem = require('../global/globalitem');
+var url = require('url');
+var ObjectID = require('mongodb').ObjectID;
 
 /* GET Item page. */
 router.get('/', function(req, res, next) {
@@ -8,13 +10,16 @@ router.get('/', function(req, res, next) {
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    console.log("Get Item page ", req.body);
-    var data = 
-    {
-        zonglan:"/admin"
-    }
+    var arg = url.parse(req.url, true).query;
+    console.log("Get Item page arg ", arg);
 
-    return res.render('item',data);
+    if(arg.id != undefined && arg.id != null){
+        globalitem.findItem({_id:ObjectID(arg.id)}, function(result){
+            return res.render('item',{zonglan:"/admin",item:result.info[0]});
+        });
+    }else{
+        return res.render('item',{zonglan:"/admin"});
+    }
 });
 
 //插入数据
