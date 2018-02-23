@@ -1,5 +1,4 @@
 var maixiandb = require('../db/maixiandb');
-var ObjectID = require('mongodb').ObjectID;
 var globalitem = {};
 
 globalitem.packageItem = function(input){
