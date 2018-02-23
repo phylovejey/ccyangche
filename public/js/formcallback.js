@@ -30,6 +30,17 @@ function search(){
 	});
 }
 
+function requestedit(target, id){
+	var url = "/item"
+	if(target == 2){
+
+	}else if(target == 3){
+
+	}
+
+	window.location.href = url + "?id=" + id;
+}
+
 function showsearchresult(target, data){
 	if(target == 1){
 		showitemreuslt(data);
@@ -121,11 +132,11 @@ function getitemrow(h){
      var btnedit = document.createElement('input'); //创建一个input控件  
      btnedit.setAttribute('type','button'); //type="button"  
      btnedit.setAttribute('value','编辑');   
+     btnedit.setAttribute('id',h._id);   
        
      //编辑操作  
      btnedit.onclick=function(){  
-		if(confirm("确定删除这一行嘛？")){
-		}  
+		requestedit(1, this.id);
      }  
      edit.appendChild(btnedit);  //把删除按钮加入td，别忘了  
 
