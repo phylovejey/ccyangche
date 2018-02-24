@@ -1,6 +1,37 @@
 var maixiandb = require('../db/maixiandb');
 var globalitem = {};
 
+globalitem.nullItem = function(){
+    return {
+        _id:"",
+        itemname:"",
+        itemname:"",
+        itemnamedes:"",
+        itemoriginalprice:"",
+        itemcurrentprice:"",
+        itemgroupprice:"",
+        itemthumbnailspic:"",
+        itemlargepic1:"",
+        itemlargepic2:"",
+        itemlargepic3:"",
+        itemlargepic4:"",
+        itemlargepic5:"",
+        itemdetailpic1:"",
+        itemdetailpic2:"",
+        itemdetailpic3:"",
+        itemdetailpic4:"",
+        itemdetailpic5:"",
+        itembannerpic:"",
+        groupnum:"",
+        groupstarttime:"",
+        sales:"",
+        like:"",
+        realinventory:"",
+        showinventory:"",
+        classify:"",
+    }
+}
+
 globalitem.packageItem = function(input){
     var result = {item:{},error:""};
 
@@ -59,7 +90,7 @@ globalitem.packageItem = function(input){
     	result.error = "classify";
     	return result;
     }
-	result.item.classify = Number(input.classify);
+	result.item.classify = input.classify;
 
     return result;
 };
@@ -80,6 +111,20 @@ globalitem.findItem = function(data, callback){
             info:result});
     });
 };
+
+globalitem.updateItem = function(id, item, callback){
+    var collection = maixiandb.db.collection('item');
+    collection.update({_id:id},{$set:item}, function(err, result){
+        if(err){
+            callback({status:0,
+                    error:err.tostring()});
+            return;
+        }
+        console.log(result);
+        callback({status:1,
+            suc:"更新商品成功"});
+    })
+}
 
 globalitem.insertItem = function(item, callback){
     var collection = maixiandb.db.collection('item');
@@ -103,7 +148,8 @@ globalitem.insertItem = function(item, callback){
                     error:err.tostring()});
                 return;
             }
-            callback({status:1});
+            callback({status:1,
+                suc:"增加商品成功"});
         });
     });
 };
