@@ -18,21 +18,28 @@ router.get('/', function(req, res, next) {
             return res.render('item',{zonglan:"/admin",item:result.info[0]});
         });
     }else{
-        return res.render('item',{zonglan:"/admin"});
+        return res.render('item',{zonglan:"/admin",item:globalitem.nullItem()});
     }
 });
 
-//插入数据
+//更新商品数据
 router.post('/', function(req, res, next){
     if(!req.cookies.user || req.cookies.user.identity != 0){
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
     var itemresult = globalitem.packageItem(req.body);
+    console.log("商品数据 ", req.body);
     if(itemresult.error === ""){
-        globalitem.insertItem(itemresult.item, function(result){
-            return res.send(result);
-        });
+        if(req.body._id == ""){//插入
+            globalitem.insertItem(itemresult.item, function(result){
+                return res.send(result);
+            });
+        }else{//更新
+            globalitem.updateItem(ObjectID(req.body._id), itemresult.item, function(result){
+                return res.send(result);
+            });
+        }
     }else{
         return res.send({status:0,
             error:itemresult.error});
