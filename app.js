@@ -7,6 +7,9 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var http = require('http');
+var https = require('https');
+var fs = require('fs');
+
 var login = require('./routes/login');
 var admin = require('./routes/admin');
 var item = require('./routes/item');
@@ -53,18 +56,27 @@ app.use(function(err, req, res, next) {
 //connect database
 maixiandb.connectdb();
 /**
- * Create HTTP server.
+ * Create server.
  */
-var server = http.createServer(app);
-server.listen(3001);
-server.on('listening', onListening);
+var httpserver = http.createServer(app);
+httpserver.listen(8080);
+httpserver.on('listening', onHttpListening);
+
+var httpsserver = https.createServer({pfx:fs.readFileSync('./certificate/IIS/www.ccyangche.com.pfx'), passphrase:"ccyangche1234!"}, app);
+httpsserver.listen(8443);
+httpsserver.on('listening', onHttpsListening);
 
 /**
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
-  var addr = server.address();
+function onHttpListening() {
+  var addr = httpserver.address();
+  console.log('Listening on ', addr);
+}
+
+function onHttpsListening() {
+  var addr = httpsserver.address();
   console.log('Listening on ', addr);
 }
 
