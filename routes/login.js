@@ -18,8 +18,8 @@ router.post('/wxlogin', function(req, res, next){
     var url = util.format("https://api.weixin.qq.com/sns/jscode2session?appid=$%s&secret=$%s&js_code=$%s&grant_type=authorization_code", "wx1de05d1121007dcf", "852ed1bc62f5abbdc31f47a2c8a38612", code);
     console.log("phy wxlogin url ", url);
 
-    https.get(url, function(ress) {
-        console.log(ress);
+    https.get(url, function(openIdRes) {
+        console.log(openIdRes.data);
     }).on('error', function(e) {
         console.log(e.message);   
     });
