@@ -1,11 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var maixiandb = require('../db/maixiandb');
+var https = require('https');
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
     console.log("GET Login Page.");
     res.render('login', { title: '买鲜后台管理系统' });
+});
+
+//"https://api.weixin.qq.com/sns/jscode2session?appid=$%s&secret=$%s&js_code=$%s&grant_type=authorization_code";
+router.post('/wxlogin', function(req, res, next){
+    var code = req.body.code;
+    var url = util.format("https://api.weixin.qq.com/sns/jscode2session?appid=$%s&secret=$%s&js_code=$%s&grant_type=authorization_code", "wx1de05d1121007dcf", "852ed1bc62f5abbdc31f47a2c8a38612", code);
+    https.get(url, function(ress) {
+        console.log(ress.text);
+    }).on('error', function(e) {
+        console.log(e.message);   
+    });
 });
 
 //登录接口
