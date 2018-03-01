@@ -3,6 +3,7 @@ var router = express.Router();
 var maixiandb = require('../db/maixiandb');
 var https = require('https');
 var util = require('util');
+var iconv = require('iconv-lite');
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
@@ -13,13 +14,20 @@ router.get('/', function(req, res, next) {
 //"https://api.weixin.qq.com/sns/jscode2session?appid=$%s&secret=$%s&js_code=$%s&grant_type=authorization_code";
 router.post('/wxlogin', function(req, res, next){
     var code = req.body.code;
-    console.log("phy wxlogin ", req.body);
 
-    var url = util.format("https://api.weixin.qq.com/sns/jscode2session?appid=$%s&secret=$%s&js_code=$%s&grant_type=authorization_code", "wx1de05d1121007dcf", "852ed1bc62f5abbdc31f47a2c8a38612", code);
-    console.log("phy wxlogin url ", url);
-
-    https.get(url, function(openIdRes) {
-        console.log(openIdRes.data);
+    var url = util.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", "wx1de05d1121007dcf", "852ed1bc62f5abbdc31f47a2c8a38612", code);
+    https.get(url, function(res) {
+        var datas = [];  
+        var size = 0;  
+        res.on('data', function (data) {  
+            datas.push(data);  
+            size += data.length;  
+        });  
+        res.on("end", function () {  
+            var buff = Buffer.concat(datas, size);  
+            var result = iconv.decode(buff, "utf8");//转码//var result = buff.toString();//不需要转编码,直接tostring  
+            console.log(result);  
+        });  
     }).on('error', function(e) {
         console.log(e.message);   
     });
