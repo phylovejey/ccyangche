@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var maixiandb = require('../db/maixiandb');
 var https = require('https');
-var util = require('util');
-var iconv = require('iconv-lite');
+var request = require("request")
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
@@ -15,21 +14,23 @@ router.get('/', function(req, res, next) {
 router.post('/wxlogin', function(req, res, next){
     var code = req.body.code;
 
-    var url = util.format("https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code", "wx1de05d1121007dcf", "852ed1bc62f5abbdc31f47a2c8a38612", code);
-    https.get(url, function(res) {
-        var datas = [];  
-        var size = 0;  
-        res.on('data', function (data) {  
-            datas.push(data);  
-            size += data.length;  
-        });  
-        res.on("end", function () {  
-            var buff = Buffer.concat(datas, size);  
-            var result = iconv.decode(buff, "utf8");//转码//var result = buff.toString();//不需要转编码,直接tostring  
-            console.log(result);  
-        });  
-    }).on('error', function(e) {
-        console.log(e.message);   
+    request.get({
+        uri:"https://api.weixin.qq.com/sns/jscode2session",
+        json:true,
+        qs:{
+            grant_type: "authorization_code",
+            appid: "wx1de05d1121007dcf",
+            secret: "852ed1bc62f5abbdc31f47a2c8a38612",
+            js_code: code           
+        }
+    }, function(err, res, data){
+        if(res.statusCode === 200){
+            console.log("[openid]", data.openid)
+            console.log("[session_key]", data.session_key)
+        }else{
+            console.log("[error]", err);
+        }
+
     });
 });
 
