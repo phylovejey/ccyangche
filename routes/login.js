@@ -3,6 +3,7 @@ var router = express.Router();
 var maixiandb = require('../db/maixiandb');
 var https = require('https');
 var request = require("request")
+var crypto = require('crypto');
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
@@ -25,8 +26,10 @@ router.post('/wxlogin', function(req, res, next){
         }
     }, function(err, res, data){
         if(res.statusCode === 200){
-            console.log("[openid]", data.openid)
-            console.log("[session_key]", data.session_key)
+            console.log("[openid]", data.openid);
+            console.log("[session_key]", data.session_key);
+
+            var token = crypto.randomBytes(16).toString("hex");
         }else{
             console.log("[error]", err);
         }
