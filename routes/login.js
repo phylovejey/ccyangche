@@ -27,12 +27,13 @@ router.post('/wxlogin', function(req, res, next){
         }
     }, function(err, res, data){
         if(res.statusCode === 200){
-            console.log("[openid]", data.openid);
-            console.log("[session_key]", data.session_key);
             var token = crypto.randomBytes(16).toString("hex");
-            globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
-            globalredis.getdata(token, function(data){
-                console.log("phy get redis ", data);
+            globalredis.getdata(token, function(redisdata){
+                if(redisdata == null){
+                    globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
+                }else{
+                    console.log("phy get redis data ", redisdata);
+                }
             })
         }else{
             console.log("[error]", err);
