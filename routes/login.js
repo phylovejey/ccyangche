@@ -4,6 +4,7 @@ var maixiandb = require('../db/maixiandb');
 var https = require('https');
 var request = require("request")
 var crypto = require('crypto');
+var globalredis = require('../global/globalredis');
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
@@ -28,8 +29,8 @@ router.post('/wxlogin', function(req, res, next){
         if(res.statusCode === 200){
             console.log("[openid]", data.openid);
             console.log("[session_key]", data.session_key);
-
             var token = crypto.randomBytes(16).toString("hex");
+            globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
         }else{
             console.log("[error]", err);
         }
