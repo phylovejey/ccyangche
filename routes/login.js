@@ -31,6 +31,9 @@ router.post('/wxlogin', function(req, res, next){
             console.log("[session_key]", data.session_key);
             var token = crypto.randomBytes(16).toString("hex");
             globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
+            globalredis.getdata(token, function(data){
+                console.log("phy get redis ", data);
+            })
         }else{
             console.log("[error]", err);
         }
