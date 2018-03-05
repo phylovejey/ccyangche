@@ -6,6 +6,12 @@ var request = require("request")
 var crypto = require('crypto');
 var globalredis = require('../global/globalredis');
 
+const mxappid = "wx1de05d1121007dcf";
+const mxsecret = "852ed1bc62f5abbdc31f47a2c8a38612";
+
+//const mxappid = "wx1de05d1121007dcf";
+//const mxsecret = "852ed1bc62f5abbdc31f47a2c8a38612";
+
 /* GET Login page. */
 router.get('/', function(req, res, next) {
     console.log("GET Login Page.");
@@ -14,6 +20,7 @@ router.get('/', function(req, res, next) {
 
 //"https://api.weixin.qq.com/sns/jscode2session?appid=$%s&secret=$%s&js_code=$%s&grant_type=authorization_code";
 router.post('/wxlogin', function(req, res, next){
+    var mxres = res;
     var code = req.body.code;
 
     request.get({
@@ -21,22 +28,18 @@ router.post('/wxlogin', function(req, res, next){
         json:true,
         qs:{
             grant_type: "authorization_code",
-            appid: "wx1de05d1121007dcf",
-            secret: "852ed1bc62f5abbdc31f47a2c8a38612",
+            appid: mxappid,
+            secret: mxsecret,
             js_code: code           
         }
     }, function(err, res, data){
         if(res.statusCode === 200){
             var token = crypto.randomBytes(16).toString("hex");
-            globalredis.getdata(token, function(redisdata){
-                if(redisdata == null){
-                    globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
-                }else{
-                    console.log("phy get redis data ", redisdata);
-                }
-            })
+            globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
+            mxres.send({status:1, sessionid:token});
         }else{
-            console.log("[error]", err);
+            console.log("phy authorization_code error ", err);
+            mxres.send({status:0, error:err.toString()});
         }
 
     });

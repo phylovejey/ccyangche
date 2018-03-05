@@ -4,7 +4,7 @@ var url = require('url');
 var globalitem = require('../global/globalitem');
 var globalredis = require('../global/globalredis'); 
 
-var wxitem = {};
+var wxitem = new Array();
 
 router.generateitempage = function(){
     globalitem.findAllItem({"sales":-1}, function(result){
@@ -22,10 +22,6 @@ router.startgenerateitempage = function(){
 
 /* GET wxitem page. */
 router.get('/', function(req, res, next) {
-    if(wxitem.length == 0){
-        router.generateitempage();
-    }
-
     var sessionid = req.header("sessionid")
     globalredis.getdata(sessionid, function(object){
         if(object != null){
@@ -33,7 +29,7 @@ router.get('/', function(req, res, next) {
             console.log("Get wxitem arg ", arg);
 
             if(arg.start != null && arg.end != null){
-                if(wxitem.length <= end){
+                if(wxitem.length <= arg.end){
                     arg.end = wxitem.length - 1;
                 }
                 res.send({status:1, item:wxitem.slice(arg.start, arg.end), end:arg.end});
