@@ -29,8 +29,8 @@ router.get('/', function(req, res, next) {
             console.log("Get wxitem arg ", arg);
 
             if(arg.start != null && arg.end != null){
-                if(wxitem.length <= arg.end){
-                    arg.end = wxitem.length - 1;
+                if(wxitem.length < arg.end){
+                    arg.end = wxitem.length;
                 }
                 res.send({status:1, item:wxitem.slice(arg.start, arg.end), end:arg.end});
             }else{
