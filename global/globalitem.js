@@ -5,7 +5,6 @@ globalitem.nullItem = function(){
     return {
         _id:"",
         itemname:"",
-        itemname:"",
         itemnamedes:"",
         itemoriginalprice:"",
         itemcurrentprice:"",
@@ -93,6 +92,22 @@ globalitem.packageItem = function(input){
 	result.item.classify = input.classify;
 
     return result;
+};
+
+globalitem.findAllItem = function(sortrule, callback){
+    var collection = maixiandb.db.collection('item');
+
+    //查询所有商品
+    collection.find().sort(sortrule).toArray(function(err, result){ 
+        if(err)
+        {
+            callback({status:0,
+                error:err.tostring()});
+            return;
+        }
+        callback({status:1,
+            info:result});
+    });
 };
 
 globalitem.findItem = function(data, callback){
