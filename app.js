@@ -56,7 +56,10 @@ app.use(function(err, req, res, next) {
 });
 
 //connect database
-maixiandb.connectdb();
+maixiandb.connectdb(function(){
+  wxitem.generateitempage();
+  wxitem.startgenerateitempage();
+});
 /**
  * Create server.
  */
