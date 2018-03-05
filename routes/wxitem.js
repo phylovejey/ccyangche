@@ -32,7 +32,7 @@ router.get('/', function(req, res, next) {
                 if(wxitem.length < arg.end){
                     arg.end = wxitem.length;
                 }
-                res.send({status:1, item:wxitem.slice(arg.start, arg.end), end:arg.end});
+                res.send({status:1, item:wxitem.slice(arg.start, arg.end), end:wxitem.length});
             }else{
                 res.send({status:0, error:"参数错误"});
             }     
