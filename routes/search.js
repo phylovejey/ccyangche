@@ -18,10 +18,6 @@ router.get('/', function(req, res, next) {
 
 //搜索数据
 router.post('/', function(req, res, next){
-	if(!req.cookies.user || req.cookies.user.identity != 0){
-        res.render('login', { title: '买鲜后台管理系统' });
-    }
-
     console.log("Get Search body ", req.body);
     if(req.body.target === '1'){
         if(req.body.key === "itemname"){
