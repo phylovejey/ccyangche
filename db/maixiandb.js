@@ -14,4 +14,49 @@ maixiandb.connectdb = function(callback){
 	});
 }
 
+maixiandb.deleteData = function(table, data, callback){
+    var collection = maixiandb.db.collection(table);
+
+    //删除数据
+    collection.remove(data, 1, function(err, result){
+    	if(err)
+    	{
+    		callback({status:0, info:err.tostring()});
+    		return;
+    	}
+    	callback({status:1,info:data});
+    });
+};
+
+maixiandb.findData = function(table, data, callback){
+    var collection = maixiandb.db.collection(table);
+
+    //查询数据
+    collection.find(data).toArray(function(err, result){ 
+        if(err)
+        {
+	    	callback({status:0,
+	    				info:err.tostring()});
+            return;
+        }
+	    callback({status:1,
+	    		  info:result});
+    });
+};
+
+maixiandb.insertData = function(table, data, callback) {
+    var collection = maixiandb.db.collection(table);
+ 
+    //插入数据
+    collection.insert(data, function(err, result) { 
+        if(err)
+        {
+	    	callback({status:0,
+	    				info:err.tostring()});
+            return;
+        }
+	    callback({status:1});
+    });
+};
+
 module.exports = maixiandb;
