@@ -23,6 +23,8 @@ router.post('/wxlogin', function(req, res, next){
     var mxres = res;
     var code = req.body.code;
 
+    console.log("phy wxlogin code", code);
+
     request.get({
         uri:"https://api.weixin.qq.com/sns/jscode2session",
         json:true,
@@ -34,9 +36,13 @@ router.post('/wxlogin', function(req, res, next){
         }
     }, function(err, res, data){
         if(res.statusCode === 200){
-            var token = crypto.randomBytes(16).toString("hex");
-            globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
-            mxres.send({status:1, sessionid:token});
+            if(data.openid != null){
+                var token = crypto.randomBytes(16).toString("hex");
+                globalredis.setdata(token, {openid:data.openid,session_key:data.session_key});
+                mxres.send({status:1, sessionid:token});
+            }else{
+                mxres.send({status:0, error:data});
+            }
         }else{
             console.log("phy authorization_code error ", err);
             mxres.send({status:0, error:err.toString()});
