@@ -24,7 +24,7 @@ router.post('/', function(req, res, next){
 
     console.log("Get Search body ", req.body);
     if(req.body.target === '1'){
-    	globalitem.findItem({itemname:{$regex:req.body.key}}, function(result){
+    	globalitem.findItem({req.body.key:{$regex:req.body.value}}, function(result){
             return res.send({target:1,result:result});
     	});
     }
