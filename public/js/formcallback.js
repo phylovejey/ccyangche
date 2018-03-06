@@ -11,7 +11,8 @@ $(document).ready(function() {
 function search(){
 	var obj = {
 		target:$("#selecttarget").val(),
-		key:$("#search").val()
+		key:"itemname",
+		value:$("#search").val(),
 	}
 	$.ajax({
 		url : "/search",
