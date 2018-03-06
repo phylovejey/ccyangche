@@ -24,9 +24,15 @@ router.post('/', function(req, res, next){
 
     console.log("Get Search body ", req.body);
     if(req.body.target === '1'){
-    	globalitem.findItem({req.body.key:{$regex:req.body.value}}, function(result){
-            return res.send({target:1,result:result});
-    	});
+        if(req.body.key === "itemname"){
+            globalitem.findItem({"itemname":{$regex:req.body.value}}, function(result){
+                return res.send({target:1,result:result});
+            });
+        }else if(req.body.key === "classify"){
+            globalitem.findItem({"classify":{$regex:req.body.value}}, function(result){
+                return res.send({target:1,result:result});
+            });
+        }
     }
     else if(req.body.target === '2'){
 
