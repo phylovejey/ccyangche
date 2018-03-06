@@ -18,6 +18,7 @@ var order = require('./routes/order');
 var search = require('./routes/search');
 var maixiandb = require('./db/maixiandb');
 var wxitem = require('./routes/wxitem');
+var banner = require('./routes/banner');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', login);
 app.use('/admin', admin);
 app.use('/wxitem', wxitem);
+app.use('/banner', banner);
 app.use('/item', item);
 app.use('/agent', agent);
 app.use('/order', order);
