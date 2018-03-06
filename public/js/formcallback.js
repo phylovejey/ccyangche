@@ -8,6 +8,16 @@ $(document).ready(function() {
 	});  
 });
 
+$(document).ready(function() {
+	$("#bannerform").ajaxForm(function(data){
+		if(data.status == 0){
+			alert(data.error);
+		}else{
+			alert(data.suc);
+		}
+	});  
+});
+
 function search(){
 	var obj = {
 		target:$("#selecttarget").val(),
