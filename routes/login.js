@@ -9,8 +9,8 @@ var globalredis = require('../global/globalredis');
 const mxappid = "wx1de05d1121007dcf";
 const mxsecret = "852ed1bc62f5abbdc31f47a2c8a38612";
 
-//const mxappid = "wx1de05d1121007dcf";
-//const mxsecret = "852ed1bc62f5abbdc31f47a2c8a38612";
+//const mxappid = "wxf40b8a310ac448ee";
+//const mxsecret = "857185500a63ee246163486da3ca6608";
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
