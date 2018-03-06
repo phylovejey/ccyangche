@@ -28,6 +28,10 @@ router.post('/', function(req, res, next){
             globalitem.findItem({"classify":{$regex:req.body.value}}, function(result){
                 return res.send({target:1,result:result});
             });
+        }else if(req.body.key === "_id"){
+            globalitem.findItem({"_id":{$regex:req.body.value}}, function(result){
+                return res.send({target:1,result:result});
+            });
         }
     }
     else if(req.body.target === '2'){
