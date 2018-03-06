@@ -11,7 +11,7 @@ $(document).ready(function() {
 function search(){
 	var obj = {
 		target:$("#selecttarget").val(),
-		key:"itemname",
+		key:"classify",
 		value:$("#search").val(),
 	}
 	$.ajax({
