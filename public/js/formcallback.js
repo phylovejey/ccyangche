@@ -67,8 +67,9 @@ function showitemreuslt(data){
 	thead.appendChild(getitemhead());
 
 	var tbody = document.getElementById('tablebody');
+
     for(var i = 0;i < data.length; i++){
-    	var trow = getitemrow(data[i]);
+    	var trow = getitemrow(data[i], tbody.getAttribute("flag"));
     	tbody.appendChild(trow);  
     }
 }
@@ -107,7 +108,7 @@ function getitemhead(){
     return row; //返回tr数据      
 } 
 
-function getitemrow(h){  
+function getitemrow(h, flag){  
 	var row = document.createElement('tr'); //创建行  
        
 	var itemname = document.createElement('td'); //创建第一列商品名称  
@@ -141,15 +142,26 @@ function getitemrow(h){
 	 var edit = document.createElement('td');//创建第八列，操作列  
      row.appendChild(edit);  
      var btnedit = document.createElement('input'); //创建一个input控件  
-     btnedit.setAttribute('type','button'); //type="button"  
-     btnedit.setAttribute('value','编辑');   
+     btnedit.setAttribute('type','button'); //type="button"     
      btnedit.setAttribute('id',h._id);   
+     btnedit.setAttribute('itemname',h.itemname);   
        
-     //编辑操作  
-     btnedit.onclick=function(){  
-		requestedit(1, this.id);
-     }  
-     edit.appendChild(btnedit);  //把删除按钮加入td，别忘了  
+     //编辑操作
+     if(flag == "0"){
+		btnedit.setAttribute('value','编辑');
+     	btnedit.onclick=function(){  
+			requestedit(1, this.id);
+		} 
+     }else if(flag == "1"){
+     	btnedit.setAttribute('value','添加');
+     	btnedit.onclick=function(){  
+			var itemnames = document.getElementById('itemnames');
+			alert(itemnames.id);
+			itemnames.value = itemnames.value + "," + this.id;
+		} 	
+     }
+ 
+     edit.appendChild(btnedit);  
 
     return row; //返回tr数据      
 }      
