@@ -33,12 +33,12 @@ router.post('/', function(req, res, next){
                 return res.send({target:1,result:result});
             });
         }
-    }
-    else if(req.body.target === '2'){
+    }else if(req.body.target === '2'){
 
-    }
-    else if(req.body.target === '3'){
+    }else if(req.body.target === '3'){
     	
+    }else if(req.body.target === '4'){
+        
     }
 });
 
