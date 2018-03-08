@@ -9,7 +9,8 @@ globalbanner.nullBanner = function(){
         bannerpic:"",
         bannerstarttime:"",
         bannerendtime:"",
-        banneritems:"",
+        banneritemids:"",
+        banneritemnames:"",
     }
 }
 
@@ -17,24 +18,25 @@ globalbanner.packageBanner = function(input){
     var result = {banner:{},error:""};
 
     if(input.bannername == null || input.bannername == ""){
-    	result.error = "bannername";
+    	result.error = "banner名称不能为空";
     	return result;
     }
     result.banner.bannername = input.bannername;
     result.banner.bannerdes = input.bannerdes != null ? input.bannerdes : "";
     if(input.bannerpic == null || input.bannerpic == ""){
-    	result.error = "bannerpic";
+    	result.error = "banner图片不能为空";
     	return result;
     }
     result.banner.bannerpic = input.bannerpic;
     result.banner.bannerstarttime = input.bannerstarttime != null ? input.bannerstarttime : ""; 
 	result.banner.bannerendtime = input.bannerendtime != null ? input.bannerendtime : "";
-	if(input.banneritems == null || input.banneritems == ""){
-    	result.error = "banneritems";
+	if(input.banneritemids == null || input.banneritemids == ""){
+    	result.error = "商品列表不能为空";
     	return result;
     }
-    result.banner.banneritems = input.banneritems;
-
+    result.banner.banneritemids = input.banneritemids;
+    result.banner.banneritemnames = input.banneritemnames != null ? input.banneritemnames : "";
+    
     return result;
 };
 
