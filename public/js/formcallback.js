@@ -149,12 +149,12 @@ function getitemrow(h, flag){
      //编辑操作
      if(flag == "0"){
 		btnedit.setAttribute('value','编辑');
-     	btnedit.onclick=function(){  
+     	btnedit.onclick = function(){  
 			requestedit(1, this.id);
 		} 
      }else if(flag == "1"){
      	btnedit.setAttribute('value','添加');
-     	btnedit.onclick=function(){  
+     	btnedit.onclick = function(){  
 			var banneritemids = document.getElementById('banneritemids');
 			if(banneritemids.value === ""){
 				banneritemids.value = this.id + ",";
@@ -172,7 +172,7 @@ function getitemrow(h, flag){
 			}else{
 				banneritemnames.value = banneritemnames.value + this.getAttribute("itemname") + ",";
 			}
-			addItemToBanner(this.getAttribute("itemname"));
+			addItemToBanner(this.getAttribute("itemname"), this.id);
 		} 	
      }
  
@@ -194,9 +194,12 @@ function addItemToBanner(itemname, itemid){
     item.innerHTML = itemname;
 
     item.onclick = function(){
+    	var itemname = this.getAttribute('itemname');
+    	var itemid = this.getAttribute('itemid');
     	var result = confirm("是否移除该商品?")
+
     	if(result){
-    		removeItemFromBanner(itemname, itemid)
+    		removeItemFromBanner(itemname, itemid);
     	}
     }
 
