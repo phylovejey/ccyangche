@@ -141,7 +141,7 @@ function getitemrow(h, flag){
 
 	 var edit = document.createElement('td');//创建第八列，操作列  
      row.appendChild(edit);  
-     var btnedit = document.createElement('input'); //创建一个input控件  
+     var btnedit = document.createElement('input'); 
      btnedit.setAttribute('type','button'); //type="button"     
      btnedit.setAttribute('id',h._id);   
      btnedit.setAttribute('itemname',h.itemname);   
@@ -155,9 +155,24 @@ function getitemrow(h, flag){
      }else if(flag == "1"){
      	btnedit.setAttribute('value','添加');
      	btnedit.onclick=function(){  
-			var itemnames = document.getElementById('itemnames');
-			alert(itemnames.id);
-			itemnames.value = itemnames.value + "," + this.id;
+			var banneritemids = document.getElementById('banneritemids');
+			if(banneritemids.value === ""){
+				banneritemids.value = this.id + ",";
+			}else{
+				if(banneritemids.value.indexOf(this.id) == -1){
+					banneritemids.value = banneritemids.value + this.id + ",";
+				}else{
+					alert("该商品已添加");
+					return;
+				}
+			}
+			var banneritemnames = document.getElementById('banneritemnames');
+			if(banneritemnames.value === ""){
+				banneritemnames.value = this.getAttribute("itemname") + ",";
+			}else{
+				banneritemnames.value = banneritemnames.value + this.getAttribute("itemname") + ",";
+			}
+			addItemToBanner(this.getAttribute("itemname"));
 		} 	
      }
  
@@ -166,5 +181,38 @@ function getitemrow(h, flag){
     return row; //返回tr数据      
 }      
 
+function addItemToBanner(itemname, itemid){
+	var item_list = document.getElementById('item_list');
+
+	var item = document.createElement('button');
+	item.setAttribute('type','button');
+	item.setAttribute('class','btn btn-warning warning_22');
+	item.setAttribute('itemname',itemname);
+	item.setAttribute('itemid',itemid);
+	item.setAttribute('id',itemid);
+
+    item.innerHTML = itemname;
+
+    item.onclick = function(){
+    	var result = confirm("是否移除该商品?")
+    	if(result){
+    		removeItemFromBanner(itemname, itemid)
+    	}
+    }
+
+    item_list.appendChild(item);  
+}
+
+function removeItemFromBanner(itemname, itemid){
+	var banneritemids = document.getElementById('banneritemids');
+	var banneritemnames = document.getElementById('banneritemnames');
+	
+	banneritemids.value = banneritemids.value.replace(itemid+",", "");
+	banneritemnames.value = banneritemnames.value.replace(itemname+",", "");
+
+	var item_list = document.getElementById('item_list');
+	var item = document.getElementById(itemid);
+	item_list.removeChild(item);
+}
 
 
