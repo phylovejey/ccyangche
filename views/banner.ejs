@@ -79,9 +79,20 @@
                                     <label class="control-label normal">结束时间</label>
                                     <input type="date" name="bannerendtime" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.date" required="" value=<%= banner.bannerendtime %>>
                                 </div>
+                                <div class="form-group" style="display:none;">
+                                    <label class="control-label">商品id</label>
+                                    <input type="text" id="banneritemids" name="banneritems" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritemids %>>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <label class="control-label">商品名称</label>
+                                    <input type="text" id="banneritemnames" name="banneritems" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritemnames %>>
+                                </div>
                                 <div class="form-group">
-                                    <label class="control-label">商品</label>
-                                    <input type="text" id="itemnames" name="banneritems" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritems %>>
+                                    <label class="control-label">商品列表</label>
+                                    <div class="but_list">
+                                      <p id="item_list">
+                                      </p>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">提交</button>
