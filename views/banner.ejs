@@ -81,17 +81,20 @@
                                 </div>
                                 <div class="form-group" style="display:none;">
                                     <label class="control-label">商品id</label>
-                                    <input type="text" id="banneritemids" name="banneritems" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritemids %>>
+                                    <input type="text" id="banneritemids" name="banneritemids" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritemids %>>
                                 </div>
                                 <div class="form-group" style="display:none;">
                                     <label class="control-label">商品名称</label>
-                                    <input type="text" id="banneritemnames" name="banneritems" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritemnames %>>
+                                    <input type="text" id="banneritemnames" name="banneritemnames" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.banneritemnames %>>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品列表</label>
                                     <div class="but_list">
-                                      <p id="item_list">
-                                      </p>
+                                        <p id="item_list">
+                                            <% banner.item.forEach(function(item){ %>
+                                                <button class="btn btn-warning warning_22" type="button" itemname=<%= item.name %> itemid=<%= item.id %> id=<%= item.id %> onclick="removeitem(this)"><%= item.name %></button>
+                                            <% }) %>
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="form-group">
