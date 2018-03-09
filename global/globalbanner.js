@@ -11,6 +11,7 @@ globalbanner.nullBanner = function(){
         bannerendtime:"",
         banneritemids:"",
         banneritemnames:"",
+        item:[],
     }
 }
 
