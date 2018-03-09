@@ -121,7 +121,7 @@ globalitem.findItem = function(data, callback){
                 error:err.tostring()});
             return;
         }
-        console.log("globalitem.findItem ", result);
+        
         callback({status:1,
             info:result});
     });
