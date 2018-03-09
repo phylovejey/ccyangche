@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var globalitem = require('../global/globalitem');
+var globalbanner = require('../global/globalbanner');
 
 /* GET Search page. */
 router.get('/', function(req, res, next) {
@@ -38,7 +39,14 @@ router.post('/', function(req, res, next){
     }else if(req.body.target === '3'){
     	
     }else if(req.body.target === '4'){
-        
+        globalbanner.findAllBanner(null, function(result){
+            if(result.status == 0){
+                console.log("phy findAllBanner error ", result.error);
+            }else{
+                console.log("phy all banner ", result.info);
+                return res.send({target:4, result:result});
+            }
+        }) 
     }
 });
 

@@ -15,6 +15,16 @@ router.get('/', function(req, res, next) {
 
     if(arg.id != undefined && arg.id != null){
         globalbanner.findBanner({_id:ObjectID(arg.id)}, function(result){
+            var ids = result.info[0].banneritemids.split(",");
+            var names = result.info[0].banneritemnames.split(",");
+
+            result.info[0].item = new Array();
+            for (var j = 0; j < ids.length - 1; j++) {
+                result.info[0].item.push({id:ids[j], name:names[j]});
+            };
+
+            console.log("Get banner item ", result.info[0].item);
+
             return res.render('banner',{zonglan:"/admin",banner:result.info[0]});
         });
     }else{
