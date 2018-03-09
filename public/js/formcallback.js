@@ -47,6 +47,8 @@ function requestedit(target, id){
 
 	}else if(target == 3){
 
+	}else if(target == 4){
+		url = "/banner"
 	}
 
 	window.location.href = url + "?id=" + id;
@@ -59,7 +61,21 @@ function showsearchresult(target, data){
 
 	}else if(target == 3){
 
+	}else if(target == 4){
+		showbannerreuslt(data);
 	}
+}
+
+function showbannerreuslt(data){
+	var thead = document.getElementById('tablehead');
+	thead.appendChild(getbannerhead());
+
+	var tbody = document.getElementById('tablebody');
+
+    for(var i = 0;i < data.length; i++){
+    	var trow = getbannerrow(data[i]);
+    	tbody.appendChild(trow);  
+    }
 }
 
 function showitemreuslt(data){
@@ -72,6 +88,20 @@ function showitemreuslt(data){
     	var trow = getitemrow(data[i], tbody.getAttribute("flag"));
     	tbody.appendChild(trow);  
     }
+}
+
+function getbannerhead(){  
+	var row = document.createElement('tr'); //创建行  
+    
+    var bannerid = document.createElement('td'); //创建第一列bannerID  
+	bannerid.innerHTML = "BannerID"; //填充数据  
+	row.appendChild(bannerid); 
+
+	var bannername = document.createElement('td'); //创建第二列banner名称  
+	bannername.innerHTML = "Banner名称"; //填充数据  
+	row.appendChild(bannername);  
+      
+    return row; //返回tr数据      
 }
 
 function getitemhead(){  
@@ -107,6 +137,34 @@ function getitemhead(){
 
     return row; //返回tr数据      
 } 
+
+function getbannerrow(h){  
+	var row = document.createElement('tr'); //创建行  
+       
+	var bannerid = document.createElement('td'); //创建第一列BannerID  
+	bannerid.innerHTML = h._id; //填充数据  
+	row.appendChild(bannerid); //加入行  ，下面类似  
+       
+	var bannername = document.createElement('td');//创建第二列Banner名称  
+	bannername.innerHTML = h.bannername;  
+	row.appendChild(bannername);  
+
+	var edit = document.createElement('td');  
+    row.appendChild(edit);  
+    var btnedit = document.createElement('input'); 
+    btnedit.setAttribute('type','button'); //type="button"  
+	btnedit.setAttribute('value','编辑');   
+    btnedit.setAttribute('id',h._id);      
+       
+    //编辑操作
+    btnedit.onclick = function(){  
+		requestedit(4, this.id);
+	} 
+ 
+    edit.appendChild(btnedit);  
+
+    return row; //返回tr数据      
+}
 
 function getitemrow(h, flag){  
 	var row = document.createElement('tr'); //创建行  
@@ -180,6 +238,16 @@ function getitemrow(h, flag){
 
     return row; //返回tr数据      
 }      
+
+function removeitem(item){
+    var itemname = item.getAttribute('itemname');
+	var itemid = item.getAttribute('itemid');
+	var result = confirm("是否移除该商品?")
+
+	if(result){
+		removeItemFromBanner(itemname, itemid);
+	}
+}
 
 function addItemToBanner(itemname, itemid){
 	var item_list = document.getElementById('item_list');
