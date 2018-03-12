@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var DB_CONN_STR = 'mongodb://mxphy:mxccyangche1234!@localhost:27017/maixiandb';
+var DB_CONN_STR = 'mongodb://mxphy:mxccyangche1234!@localhost:24404/maixiandb';
 var maixiandb = {};
 
 maixiandb.connectdb = function(callback){
