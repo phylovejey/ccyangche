@@ -1,11 +1,11 @@
 var MongoClient = require('mongodb').MongoClient;
-var DB_CONN_STR = 'mongodb://localhost:27017/maixiandb';
+var DB_CONN_STR = 'mongodb://mxphy:mxccyangche1234!@localhost:27017/maixiandb';
 var maixiandb = {};
 
 maixiandb.connectdb = function(callback){
 	MongoClient.connect(DB_CONN_STR, function(err, db) {
         if(err){
-            console.log("连接失败！");
+            console.log("连接失败！", err);
         }else{
             console.log("连接成功！"); 
             maixiandb.db = db;
