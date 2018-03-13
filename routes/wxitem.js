@@ -3,6 +3,7 @@ var router = express.Router();
 var url = require('url');
 var globalitem = require('../global/globalitem');
 var globalredis = require('../global/globalredis'); 
+var ObjectID = require('mongodb').ObjectID;
 
 var wxitem = new Array();
 
@@ -30,6 +31,10 @@ router.get('/', function(req, res, next) {
             arg.end = wxitem.length;
         }
         res.send({status:1, item:wxitem.slice(arg.start, arg.end), end:wxitem.length});
+    }else if(arg.id != null){
+        globalitem.findItem({_id:ObjectID(arg.id)}, function(result){
+            return res.send(result);
+        });
     }else{
         res.send({status:0, error:"参数错误"});
     }
