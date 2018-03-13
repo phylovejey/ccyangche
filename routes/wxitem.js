@@ -31,10 +31,20 @@ router.get('/', function(req, res, next) {
             arg.end = wxitem.length;
         }
         res.send({status:1, item:wxitem.slice(arg.start, arg.end), end:wxitem.length});
-    }else if(arg.id != null){
-        globalitem.findItem({_id:ObjectID(arg.id)}, function(result){
-            return res.send(result);
-        });
+    }else if(arg.ids != null){
+        var items = {};
+        for (var i = 0; i < wxitem.length; i++) {
+            for (var j = 0; j < arg.ids.length; i++) {
+                if(wxitem[i]["_id"] === arg.ids[j]){
+                    items.push(wxitem[i]);
+                    break;
+                }
+            }
+            if(items.length === arg.ids.length){
+                break;
+            }
+        }
+        res.send({status:1, items:items});
     }else{
         res.send({status:0, error:"参数错误"});
     }
