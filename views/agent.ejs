@@ -55,46 +55,34 @@
             		<div class="xs">
             			<h3>代理信息</h3>
             			<div class="well1 white">
-            			<form class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
+            			<form action='/agent' method='post' id="agentform" class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
 							<fieldset>
+                                <div class="form-group" style="display:none;">
+                                    <label class="control-label">代理ID</label>
+                                    <input type="text" name="_id" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= agent._id %>>
+                                </div>
 								<div class="form-group">
 									<label class="control-label">真实姓名</label>
-              						<input type="text" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
+              						<input type="text" name="name" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
             					</div>
                                 <div class="form-group">
                                     <label class="control-label">性别</label>
-                                    <select class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
-                                        <option value=1>男</option>
-                                        <option value=2>女</option>
+                                    <select name="sex" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
+                                        <option value=0>男</option>
+                                        <option value=1>女</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label normal">出生年月</label>
-                                    <input type="date" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.date" required="">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">用户名</label>
-                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">密码</label>
-                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
-                                </div>
-                                <div class="form-group">
                                     <label class="control-label">手机号</label>
-                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
+                                    <input type="text" name="phonenumber" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">代理区域</label>
-                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
+                                    <label class="control-label">代理社区</label>
+                                    <input type="text" name="community" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">介绍人姓名</label>
-                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">介绍人手机号</label>
-                                    <input type="text" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
+                                    <label class="control-label">代理等级</label>
+                                    <input type="text" name="level" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" ng-pattern="/[1-5]/" required="">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">提交</button>

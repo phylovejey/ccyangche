@@ -1,17 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var globalitem = require('../global/globalitem');
-var globalbanner = require('../global/globalbanner');
 
 /* GET Search page. */
 router.get('/', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
-        res.render('login', { title: '买鲜后台管理系统' });
+        return res.render('login', { title: '买鲜后台管理系统' });
     }
 
     var data = 
     {
-        zonglan:"/admin"
+        zonglan:"/index"
     }
 
     return res.render('search',data);
@@ -19,34 +17,15 @@ router.get('/', function(req, res, next) {
 
 //搜索数据
 router.post('/', function(req, res, next){
-    console.log("Get Search body ", req.body);
-    if(req.body.target === '1'){
-        if(req.body.key === "itemname"){
-            globalitem.findItem({"itemname":{$regex:req.body.value}}, function(result){
-                return res.send({target:1,result:result});
-            });
-        }else if(req.body.key === "classify"){
-            globalitem.findItem({"classify":{$regex:req.body.value}}, function(result){
-                return res.send({target:1,result:result});
-            });
-        }else if(req.body.key === "_id"){
-            globalitem.findItem({"_id":{$regex:req.body.value}}, function(result){
-                return res.send({target:1,result:result});
-            });
-        }
-    }else if(req.body.target === '2'){
+    if(req.body.target === '1') {
+    }
+    else if(req.body.target === '2') {
 
-    }else if(req.body.target === '3'){
+    }
+    else if(req.body.target === '3') {
     	
-    }else if(req.body.target === '4'){
-        globalbanner.findAllBanner(null, function(result){
-            if(result.status == 0){
-                console.log("phy findAllBanner error ", result.error);
-            }else{
-                console.log("phy all banner ", result.info);
-                return res.send({target:4, result:result});
-            }
-        }) 
+    }
+    else if(req.body.target === '4') {
     }
 });
 

@@ -1,35 +1,13 @@
 var express = require('express');
 var router = express.Router();
-var globalbanner = require('../global/globalbanner');
-var url = require('url');
-var ObjectID = require('mongodb').ObjectID;
 
 /* GET banner page. */
 router.get('/', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
-        res.render('login', { title: '买鲜后台管理系统' });
+        return res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    var arg = url.parse(req.url, true).query;
-    console.log("Get banner page arg ", arg);
-
-    if(arg.id != undefined && arg.id != null){
-        globalbanner.findBanner({_id:ObjectID(arg.id)}, function(result){
-            var ids = result.info[0].banneritemids.split(",");
-            var names = result.info[0].banneritemnames.split(",");
-
-            result.info[0].item = new Array();
-            for (var j = 0; j < ids.length - 1; j++) {
-                result.info[0].item.push({id:ids[j], name:names[j]});
-            };
-
-            console.log("Get banner item ", result.info[0].item);
-
-            return res.render('banner',{zonglan:"/admin",banner:result.info[0]});
-        });
-    }else{
-        return res.render('banner',{zonglan:"/admin",banner:globalbanner.nullBanner()});
-    }
+    return res.render('banner',{zonglan:"/index"});
 });
 
 //更新banner数据
@@ -38,22 +16,6 @@ router.post('/', function(req, res, next){
         res.render('login', { title: '买鲜后台管理系统' });
     }
     console.log("banner数据 ", req.body);
-
-    var bannerresult = globalbanner.packageBanner(req.body);
-    if(bannerresult.error === ""){
-        if(req.body._id == ""){//插入
-            globalbanner.insertBanner(bannerresult.banner, function(result){
-                return res.send(result);
-            });
-        }else{//更新
-            globalbanner.updateBanner(ObjectID(req.body._id), bannerresult.banner, function(result){
-                return res.send(result);
-            });
-        }
-    }else{
-        return res.send({status:0,
-            error:bannerresult.error});
-    }
 });
 
 module.exports = router;

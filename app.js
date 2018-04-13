@@ -11,14 +11,19 @@ var https = require('https');
 var fs = require('fs');
 
 var login = require('./routes/login');
-var admin = require('./routes/admin');
 var item = require('./routes/item');
 var agent = require('./routes/agent');
 var order = require('./routes/order');
 var search = require('./routes/search');
-var maixiandb = require('./db/maixiandb');
-var wxitem = require('./routes/wxitem');
 var banner = require('./routes/banner');
+
+var mongoose = require('mongoose').set('debug', true);
+mongoose.Promise = require('bluebird');
+
+const connect = mongoose.connect('mongodb://mxphy:mxccyangche1234!@localhost:24404/maixiandb');
+connect.then((db) => {
+  console.log('Connected correctly to server');
+}, (err) => { console.log(err);});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,8 +36,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
-app.use('/admin', admin);
-app.use('/wxitem', wxitem);
 app.use('/banner', banner);
 app.use('/item', item);
 app.use('/agent', agent);
@@ -57,30 +60,25 @@ app.use(function(err, req, res, next) {
   //res.render('error');
 });
 
-//connect database
-maixiandb.connectdb(function(){
-  wxitem.generateitempage();
-  wxitem.startgenerateitempage();
-});
 /**
  * Create server.
  */
-var httpserver = http.createServer(app);
+/*var httpserver = http.createServer(app);
 httpserver.listen(8080);
-httpserver.on('listening', onHttpListening);
+httpserver.on('listening', onHttpListening);*/
 
 var httpsserver = https.createServer({pfx:fs.readFileSync('./certificate/IIS/www.ccyangche.com.pfx'), passphrase:"ccyangche1234!"}, app);
-httpsserver.listen(8443);
+httpsserver.listen(13333);
 httpsserver.on('listening', onHttpsListening);
 
 /**
  * Event listener for HTTP server "listening" event.
  */
 
-function onHttpListening() {
+/*function onHttpListening() {
   var addr = httpserver.address();
   console.log('Listening on ', addr);
-}
+}*/
 
 function onHttpsListening() {
   var addr = httpsserver.address();

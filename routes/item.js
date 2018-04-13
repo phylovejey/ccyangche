@@ -1,49 +1,38 @@
 var express = require('express');
 var router = express.Router();
-var globalitem = require('../global/globalitem');
-var url = require('url');
-var ObjectID = require('mongodb').ObjectID;
 
-/* GET Item page. */
+const itemlists = require('../models/itemlists');
+
 router.get('/', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
-        res.render('login', { title: '买鲜后台管理系统' });
+        return res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    var arg = url.parse(req.url, true).query;
-    console.log("Get Item page arg ", arg);
-
-    if(arg.id != undefined && arg.id != null){
-        globalitem.findItem({_id:ObjectID(arg.id)}, function(result){
-            return res.render('item',{zonglan:"/admin",item:result.info[0]});
-        });
-    }else{
-        return res.render('item',{zonglan:"/admin",item:globalitem.nullItem()});
-    }
+    return res.render('item',{zonglan:"/index"});
 });
 
-//更新商品数据
-router.post('/', function(req, res, next){
+router.get('/:itemid', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
-        res.render('login', { title: '买鲜后台管理系统' });
+        return res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    var itemresult = globalitem.packageItem(req.body);
-    console.log("商品数据 ", req.body);
-    if(itemresult.error === ""){
-        if(req.body._id == ""){//插入
-            globalitem.insertItem(itemresult.item, function(result){
-                return res.send(result);
-            });
-        }else{//更新
-            globalitem.updateItem(ObjectID(req.body._id), itemresult.item, function(result){
-                return res.send(result);
-            });
-        }
-    }else{
-        return res.send({status:0,
-            error:itemresult.error});
+    itemlists.findById(req.params.itemid)
+    .then((item) => {
+        return res.render('item',{zonglan:"/index", status:1, item:item});
+    }, (err) => next(err))
+    .catch((err) => next(err));
+});
+
+router.post('/', function(req, res, next) {
+    if(!req.cookies.user || req.cookies.user.identity != 0){
+        return res.render('login', { title: '买鲜后台管理系统' });
     }
+
+    itemlists.findOneAndUpdate({name:req.body.name}, req.body, {new:true,upsert:true})
+    .then((result) => {
+        return res.send({status:1});
+    }, (err) => next(err))
+    .catch((err) => next(err));
 });
 
 module.exports = router;
