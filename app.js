@@ -11,11 +11,12 @@ var https = require('https');
 var fs = require('fs');
 
 var login = require('./routes/login');
+var index = require('./routes/index');
 var item = require('./routes/item');
 var agent = require('./routes/agent');
 var order = require('./routes/order');
-var search = require('./routes/search');
 var banner = require('./routes/banner');
+var search = require('./routes/search');
 
 var mongoose = require('mongoose').set('debug', true);
 mongoose.Promise = require('bluebird');
@@ -36,6 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', login);
+app.use('/index', index);
 app.use('/banner', banner);
 app.use('/item', item);
 app.use('/agent', agent);
