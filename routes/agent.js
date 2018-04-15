@@ -18,13 +18,26 @@ router.get('/', function(req, res, next) {
     return res.render('agentnull', data);
 });
 
-//增加代理
-router.post('/', function(req, res, next){
-    console.log("phy body ", req.body);
+router.get('/:agentid', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
         return res.render('login', { title: '买鲜后台管理系统' });
     }
 
+    agents.findById(req.params.agentid)
+    .then((agent) => {
+        agent.community = agent.community.join(",");
+        return res.render('agent',{zonglan:"/index", status:1, agent:agent});
+    }, (err) => next(err))
+    .catch((err) => next(err));
+});
+
+//增加代理
+router.post('/', function(req, res, next){
+    if(!req.cookies.user || req.cookies.user.identity != 0){
+        return res.render('login', { title: '买鲜后台管理系统' });
+    }
+
+    req.body.community = req.body.community.split(",");
     agents.findOneAndUpdate({phonenumber:req.body.phonenumber}, req.body, {new:true,upsert:true})
     .then((result) => {
         return res.send({status:1});

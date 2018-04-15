@@ -27,7 +27,7 @@ function requestedit(target, id){
 
 	}
 	else if(target == 3) {
-
+		url = "/agent"
 	}
 	else if(target == 4) {
 		url = "/banner"
@@ -204,7 +204,8 @@ function getagentrow(h, flag){
      btnedit.setAttribute('itemname',h.name);   
      //编辑操作
 	btnedit.setAttribute('value','编辑');
- 	btnedit.onclick = function(){  
+ 	btnedit.onclick = function(){ 
+ 		alert(this.id);
 		requestedit(3, this.id);
 	}
 	edit.appendChild(btnedit);
@@ -217,7 +218,7 @@ function getagentrow(h, flag){
      btndel.setAttribute('itemname',h.name);
     //删除操作
 	btndel.setAttribute('value','删除');
- 	btnedit.onclick = function(){  
+ 	btndel.onclick = function(){  
 		requestedit(3, this.id);
 	}  
     del.appendChild(btndel);  
@@ -296,7 +297,7 @@ function getitemrow(h, flag){
      btndel.setAttribute('itemname',h.name);
     //删除操作
 	btndel.setAttribute('value','删除');
- 	btnedit.onclick = function(){  
+ 	btndel.onclick = function(){  
 		requestedit(1, this.id);
 	}  
     del.appendChild(btndel); 
