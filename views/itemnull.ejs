@@ -51,57 +51,53 @@
             			<div class="well1 white">
             			<form action='/item' method='post' id="itemform" class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
 							<fieldset>
-                                <div class="form-group" style="display:none;">
-                                    <label class="control-label">商品ID</label>
-                                    <input type="text" name="_id" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= item._id %>>
-                                </div>
 								<div class="form-group">
 									<label class="control-label">商品名称</label>
-              						<input type="text" name="name" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= item.name %>>
+              						<input type="text" name="name" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
             					</div>
                                 <div class="form-group">
                                     <label class="control-label">商品简短描述</label>
-                                    <input type="text" name="briefDes" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= item.briefDes %>>
+                                    <input type="text" name="briefDes" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品现价</label>
-                                    <input type="text" name="normalprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.normalprice %>>
+                                    <input type="text" name="normalprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品团购价</label>
-                                    <input type="text" name="agentprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.agentprice %>>
+                                    <input type="text" name="agentprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品小图</label>
-                                    <input type="url" name="overviewImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.overviewImage %>>
+                                    <input type="url" name="overviewImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品ICON</label>
-                                    <input type="url" name="iconImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.iconImage %>>
+                                    <input type="url" name="iconImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品大图</label>
-                                    <input type="url" name="innerImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.innerImage %>>
+                                    <input type="url" name="innerImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品详情图</label>
-                                    <input type="url" name="itemDetailImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.itemDetailImage %>>
+                                    <input type="url" name="itemDetailImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品Banner图</label>
-                                    <input type="url" name="bannerImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.bannerImage %>>
+                                    <input type="url" name="bannerImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">销量</label>
-                                    <input type="text" name="sales" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="" readonly="readonly" value=<%= item.sales %>>
+                                    <input type="text" name="sales" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="" readonly="readonly">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">评分</label>
-                                    <input type="text" name="rating" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[1-5]/" required="" readonly="readonly" value=<%= item.rating %>>
+                                    <input type="text" name="rating" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[1-5]/" required="" readonly="readonly">
                                 </div>
                                 <div class="form-group filled">
                                     <label class="control-label">销售状态</label>
-                                    <select name="status" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="" value=<%= item.status %>>
+                                    <select name="status" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
                                         <option value=0>正常</option>
                                         <option value=1>已售罄</option>
                                         <option value=2>下架</option>
@@ -109,7 +105,7 @@
                                 </div>
                                 <div class="form-group filled">
                                     <label class="control-label">商品分类</label>
-                                    <select name="category" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="" value=<%= item.classify %>>
+                                    <select name="category" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
                                         <option value="虾">虾</option>
                                         <option value="蟹">蟹</option>
                                         <option value="鱼">鱼</option>

@@ -21,6 +21,10 @@ const itemSchema = new Schema({
 		type: String,
 		required: true
 	},
+	iconImage: {
+		type: String,
+		required: true
+	},
 	category: {
 		type: String,
 		required: true
@@ -34,6 +38,12 @@ const itemSchema = new Schema({
 		min: 1,
 		max: 5,
 		default: 5
+	},
+	status:{
+		type: Number,
+		min: 0,
+		max: 2,
+		default: 0
 	},
 	normalprice: {
 		type: Currency,

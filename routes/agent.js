@@ -15,11 +15,12 @@ router.get('/', function(req, res, next) {
         zonglan:"/index"
     }
 
-    return res.render('agent', data);
+    return res.render('agentnull', data);
 });
 
 //增加代理
 router.post('/', function(req, res, next){
+    console.log("phy body ", req.body);
     if(!req.cookies.user || req.cookies.user.identity != 0){
         return res.render('login', { title: '买鲜后台管理系统' });
     }

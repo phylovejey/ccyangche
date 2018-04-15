@@ -8,7 +8,8 @@ router.get('/', function(req, res, next) {
         return res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    return res.render('item',{zonglan:"/index"});
+    console.log("phy index page");
+    return res.render('itemnull',{zonglan:"/index"});
 });
 
 router.get('/:itemid', function(req, res, next) {

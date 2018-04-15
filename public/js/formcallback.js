@@ -1,27 +1,6 @@
-$(document).ready(function() {
-	$("#itemform").ajaxForm(function(data){
-		if(data.status == 0){
-			alert(data.error);
-		}else{
-			alert(data.suc);
-		}
-	});  
-});
-
-$(document).ready(function() {
-	$("#bannerform").ajaxForm(function(data){
-		if(data.status == 0){
-			alert(data.error);
-		}else{
-			alert(data.suc);
-		}
-	});  
-});
-
 function search(){
 	var obj = {
 		target:$("#selecttarget").val(),
-		key:"classify",
 		value:$("#search").val(),
 	}
 	$.ajax({
@@ -29,10 +8,11 @@ function search(){
 		type : "POST",
 		data : obj,
 		success : function(result){
-			if(result.result.status == 0){
-				alert(result.result.error);
-			}else{
-				showsearchresult(result.target, result.result.info);
+			if(result.status == 0) {
+				alert(result.error);
+			}
+			else {
+				showsearchresult(result.target, result.results);
 			}
 		},
 		error:function(result){
@@ -43,25 +23,30 @@ function search(){
 
 function requestedit(target, id){
 	var url = "/item"
-	if(target == 2){
+	if(target == 2) {
 
-	}else if(target == 3){
+	}
+	else if(target == 3) {
 
-	}else if(target == 4){
+	}
+	else if(target == 4) {
 		url = "/banner"
 	}
 
-	window.location.href = url + "?id=" + id;
+	window.location.href = url + "/" + id;
 }
 
 function showsearchresult(target, data){
-	if(target == 1){
+	if(target == 1) {
 		showitemreuslt(data);
-	}else if(target == 2){
+	}
+	else if(target == 2) {
 
-	}else if(target == 3){
-
-	}else if(target == 4){
+	}
+	else if(target == 3) {
+		showagentreuslt(data);
+	}
+	else if(target == 4) {
 		showbannerreuslt(data);
 	}
 }
@@ -74,6 +59,18 @@ function showbannerreuslt(data){
 
     for(var i = 0;i < data.length; i++){
     	var trow = getbannerrow(data[i]);
+    	tbody.appendChild(trow);  
+    }
+}
+
+function showagentreuslt(data){
+	var thead = document.getElementById('tablehead');
+	thead.appendChild(getagenthead());
+
+	var tbody = document.getElementById('tablebody');
+
+    for(var i = 0;i < data.length; i++){
+    	var trow = getagentrow(data[i], tbody.getAttribute("flag"));
     	tbody.appendChild(trow);  
     }
 }
@@ -104,6 +101,28 @@ function getbannerhead(){
     return row; //返回tr数据      
 }
 
+function getagenthead(){  
+	var row = document.createElement('tr'); //创建行
+       
+	var name = document.createElement('td'); //创建第一列代理姓名  
+	name.innerHTML = "代理姓名"; //填充数据  
+	row.appendChild(name); //加入行  ，下面类似  
+       
+	var phonenumber = document.createElement('td');//创建第二列联系电话 
+	phonenumber.innerHTML = "联系电话";  
+	row.appendChild(phonenumber);  
+       
+	var community = document.createElement('td');//创建第三列社区  
+	community.innerHTML = "社区";  
+	row.appendChild(community);
+
+	var level = document.createElement('td');//创建第四列代理等级  
+	level.innerHTML = "代理等级";  
+	row.appendChild(level); 
+
+    return row; //返回tr数据      
+}
+
 function getitemhead(){  
 	var row = document.createElement('tr'); //创建行  
        
@@ -122,14 +141,6 @@ function getitemhead(){
 	var sales = document.createElement('td');//创建第四列商品销量  
 	sales.innerHTML = "商品销量";  
 	row.appendChild(sales); 
-
-	var realinventory = document.createElement('td');//创建第五列商品实际库存  
-	realinventory.innerHTML = "商品实际库存";  
-	row.appendChild(realinventory); 
-
-	var showinventory = document.createElement('td');//创建第六列商品显示库存  
-	showinventory.innerHTML = "商品显示库存";  
-	row.appendChild(showinventory);
 
 	var classify = document.createElement('td');//创建第七列商品分类
 	classify.innerHTML = "商品分类";  
@@ -166,51 +177,92 @@ function getbannerrow(h){
     return row; //返回tr数据      
 }
 
+
+function getagentrow(h, flag){
+	var row = document.createElement('tr'); //创建行  
+	var name = document.createElement('td'); //创建第一列代理姓名  
+	name.innerHTML = h.name; //填充数据  
+	row.appendChild(name); //加入行  ，下面类似  
+       
+	var phonenumber = document.createElement('td');//创建第二列联系电话  
+	phonenumber.innerHTML = h.phonenumber;  
+	row.appendChild(phonenumber);  
+       
+	var community = document.createElement('td');//创建第三列社区  
+	community.innerHTML = h.community;  
+	row.appendChild(community);
+
+	var level = document.createElement('td');//创建第四列代理等级  
+	level.innerHTML = h.level;  
+	row.appendChild(level); 
+
+	 var edit = document.createElement('td');//创建第五列，操作列  
+     row.appendChild(edit);  
+     var btnedit = document.createElement('input'); 
+     btnedit.setAttribute('type','button'); //type="button"     
+     btnedit.setAttribute('id',h._id);   
+     btnedit.setAttribute('itemname',h.name);   
+     //编辑操作
+	btnedit.setAttribute('value','编辑');
+ 	btnedit.onclick = function(){  
+		requestedit(3, this.id);
+	}
+	edit.appendChild(btnedit);
+
+	 var del = document.createElement('td');//创建第六列，操作列  
+     row.appendChild(del);  
+     var btndel = document.createElement('input'); 
+     btndel.setAttribute('type','button'); //type="button"     
+     btndel.setAttribute('id',h._id);   
+     btndel.setAttribute('itemname',h.name);
+    //删除操作
+	btndel.setAttribute('value','删除');
+ 	btnedit.onclick = function(){  
+		requestedit(3, this.id);
+	}  
+    del.appendChild(btndel);  
+
+    return row; //返回tr数据      
+}   
+
 function getitemrow(h, flag){  
 	var row = document.createElement('tr'); //创建行  
        
 	var itemname = document.createElement('td'); //创建第一列商品名称  
-	itemname.innerHTML = h.itemname; //填充数据  
+	itemname.innerHTML = h.name; //填充数据  
 	row.appendChild(itemname); //加入行  ，下面类似  
        
-	var itemoriginalprice = document.createElement('td');//创建第二列商品原价  
-	itemoriginalprice.innerHTML = h.itemoriginalprice;  
-	row.appendChild(itemoriginalprice);  
+	var normalprice = document.createElement('td');//创建第二列商品原价  
+	normalprice.innerHTML = h.normalprice;  
+	row.appendChild(normalprice);  
        
-	var itemcurrentprice = document.createElement('td');//创建第三列商品现价  
-	itemcurrentprice.innerHTML = h.itemcurrentprice;  
-	row.appendChild(itemcurrentprice);
+	var agentprice = document.createElement('td');//创建第三列商品现价  
+	agentprice.innerHTML = h.agentprice;  
+	row.appendChild(agentprice);
 
 	var sales = document.createElement('td');//创建第四列商品销量  
 	sales.innerHTML = h.sales;  
 	row.appendChild(sales); 
 
-	var realinventory = document.createElement('td');//创建第五列商品实际库存  
-	realinventory.innerHTML = h.realinventory;  
-	row.appendChild(realinventory); 
+	var category = document.createElement('td');//创建第5列商品分类
+	category.innerHTML = h.category;  
+	row.appendChild(category);
 
-	var showinventory = document.createElement('td');//创建第六列商品显示库存  
-	showinventory.innerHTML = h.showinventory;  
-	row.appendChild(showinventory);
-
-	var classify = document.createElement('td');//创建第七列商品分类
-	classify.innerHTML = h.classify;  
-	row.appendChild(classify);
-
-	 var edit = document.createElement('td');//创建第八列，操作列  
+	 var edit = document.createElement('td');//创建第6列，操作列  
      row.appendChild(edit);  
      var btnedit = document.createElement('input'); 
      btnedit.setAttribute('type','button'); //type="button"     
      btnedit.setAttribute('id',h._id);   
-     btnedit.setAttribute('itemname',h.itemname);   
+     btnedit.setAttribute('itemname',h.name);   
        
      //编辑操作
-     if(flag == "0"){
+     if(flag == "0") {
 		btnedit.setAttribute('value','编辑');
      	btnedit.onclick = function(){  
 			requestedit(1, this.id);
 		} 
-     }else if(flag == "1"){
+     }
+     else if(flag == "1") {
      	btnedit.setAttribute('value','添加');
      	btnedit.onclick = function(){  
 			var banneritemids = document.getElementById('banneritemids');
@@ -234,7 +286,20 @@ function getitemrow(h, flag){
 		} 	
      }
  
-     edit.appendChild(btnedit);  
+     edit.appendChild(btnedit);
+
+     var del = document.createElement('td');//创建第7列 
+     row.appendChild(del);  
+     var btndel = document.createElement('input'); 
+     btndel.setAttribute('type','button'); //type="button"     
+     btndel.setAttribute('id',h._id);   
+     btndel.setAttribute('itemname',h.name);
+    //删除操作
+	btndel.setAttribute('value','删除');
+ 	btnedit.onclick = function(){  
+		requestedit(1, this.id);
+	}  
+    del.appendChild(btndel); 
 
     return row; //返回tr数据      
 }      

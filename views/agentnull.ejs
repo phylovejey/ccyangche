@@ -49,32 +49,28 @@
             			<div class="well1 white">
             			<form action='/agent' method='post' id="agentform" class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
 							<fieldset>
-                                <div class="form-group" style="display:none;">
-                                    <label class="control-label">代理ID</label>
-                                    <input type="text" name="_id" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= agent._id %>>
-                                </div>
 								<div class="form-group">
 									<label class="control-label">真实姓名</label>
-              						<input type="text" name="name" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= agent.name %>>
+              						<input type="text" name="name" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
             					</div>
                                 <div class="form-group">
                                     <label class="control-label">性别</label>
-                                    <select name="sex" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="" value=<%= agent.sex %>>
+                                    <select name="sex" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
                                         <option value=0>男</option>
                                         <option value=1>女</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">手机号</label>
-                                    <input type="text" name="phonenumber" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="" value=<%= agent.phonenumber %>>
+                                    <input type="text" name="phonenumber" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">代理社区</label>
-                                    <input type="text" name="community" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.name" required="" value=<%= agent.community %>>
+                                    <input type="text" name="community" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">代理等级</label>
-                                    <input type="text" name="level" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" ng-pattern="/[1-5]/" required="" value=<%= agent.level %>>
+                                    <input type="text" name="level" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" ng-pattern="/[1-5]/" required="">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">提交</button>
