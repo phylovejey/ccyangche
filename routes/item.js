@@ -27,7 +27,6 @@ router.get('/:itemid', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    console.log("phy body ", req.body);
     if(!req.cookies.user || req.cookies.user.identity != 0){
         return res.render('login', { title: '买鲜后台管理系统' });
     }

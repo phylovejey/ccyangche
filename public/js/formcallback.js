@@ -21,6 +21,28 @@ function search(){
 	});
 }
 
+function mydelete(_url, _id){
+	var obj = {
+		_id:_id,
+	}
+	$.ajax({
+		url : _url,
+		type : "DELETE",
+		data : obj,
+		success : function(result){
+			if(result.status == 0) {
+				alert("操作失败");
+			}
+			else {
+				alert("操作成功");
+			}
+		},
+		error:function(result){
+			alert(result);
+		}
+	});
+}
+
 function requestedit(target, id){
 	var url = "/item"
 	if(target == 2) {
@@ -214,12 +236,11 @@ function getagentrow(h, flag){
      row.appendChild(del);  
      var btndel = document.createElement('input'); 
      btndel.setAttribute('type','button'); //type="button"     
-     btndel.setAttribute('id',h._id);   
-     btndel.setAttribute('itemname',h.name);
+     btndel.setAttribute('id',h._id);      
     //删除操作
 	btndel.setAttribute('value','删除');
  	btndel.onclick = function(){  
-		requestedit(3, this.id);
+		mydelete('/agent', this.id);
 	}  
     del.appendChild(btndel);  
 
@@ -292,13 +313,12 @@ function getitemrow(h, flag){
      var del = document.createElement('td');//创建第7列 
      row.appendChild(del);  
      var btndel = document.createElement('input'); 
-     btndel.setAttribute('type','button'); //type="button"     
-     btndel.setAttribute('id',h._id);   
-     btndel.setAttribute('itemname',h.name);
+     btndel.setAttribute('type','button'); //type="button"  
+     btndel.setAttribute('id',h._id);
     //删除操作
 	btndel.setAttribute('value','删除');
  	btndel.onclick = function(){  
-		requestedit(1, this.id);
+		mydelete("/item", this.id);
 	}  
     del.appendChild(btndel); 
 
