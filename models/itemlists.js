@@ -13,10 +13,6 @@ const itemSchema = new Schema({
 		type: String,
 		required: true
 	},
-	bannerImage: {
-		type: String,
-		default: ''
-	},
 	overviewImage: {
 		type: String,
 		required: true

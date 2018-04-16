@@ -51,38 +51,33 @@
                         <div class="well1 white">
                         <form action='/banner' method='post' id="bannerform" class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
                             <fieldset>
-                                <div class="form-group" style="display:none;">
-                                    <label class="control-label">BannerID</label>
-                                    <input type="text" name="_id" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner._id %>>
-                                </div>
                                 <div class="form-group">
                                     <label class="control-label">Banner名称</label>
-                                    <input type="text" name="bannername" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.bannername %>>
+                                    <input type="text" name="bannername" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">Banner图片</label>
-                                    <input type="text" name="bannerpic" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.bannerimage %>>
+                                    <input type="text" name="bannerimage" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">状态</label>
-                                    <select name="status" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="" value=<%= banner.status %>>
+                                    <select name="status" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="">
                                         <option value=0>正常</option>
                                         <option value=1>下架</option>
                                     </select>
                                 </div>
                                 <div class="form-group" style="display:none;">
-                                    <label class="control-label">商品id</label>
-                                    <input type="text" id="itemid" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.itemid %>>
+                                    <label class="control-label">商品ID</label>
+                                    <input type="text" id="itemid" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group" style="display:none;">
                                     <label class="control-label">商品名称</label>
-                                    <input type="text" id="itemname" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= banner.itemname %>>
+                                    <input type="text" id="itemname" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label">商品列表</label>
                                     <div class="but_list">
                                         <p id="item_list">
-                                            <button class="btn btn-warning warning_22" type="button" itemname=<%= banner.itemname %> itemid=<%= banner.itemid %> id=<%= banner.itemid %> onclick="removeitem(this)"><%= banner.itemname %></button>
                                         </p>
                                     </div>
                                 </div>

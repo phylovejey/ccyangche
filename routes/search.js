@@ -3,6 +3,7 @@ var router = express.Router();
 
 const itemlists = require('../models/itemlists');
 const agents = require('../models/agents');
+const banners = require('../models/banners');
 
 /* GET Search page. */
 router.get('/', function(req, res, next) {
@@ -23,7 +24,7 @@ router.post('/', function(req, res, next){
     console.log("phy search body ", req.body);
     
     var searchkey = req.body.value;
-    var regex = new RegExp(".*" + searchkey + ".*","i"); // re为/^\d+bl$/gim
+    var regex = new RegExp(".*" + searchkey + ".*","i"); //
     if(req.body.target === '1') {
         itemlists.find({name:regex})
         .then((items) => {
@@ -44,6 +45,12 @@ router.post('/', function(req, res, next){
         .catch((err) => next(err));
     }
     else if(req.body.target === '4') {
+        banners.find({bannername:regex})
+        .then((banner) => {
+            console.log("phy results ", banner);
+            res.send({status:1, results:banner, target:4});
+        }, (err) => next(err))
+        .catch((err) => next(err));
     }
 });
 

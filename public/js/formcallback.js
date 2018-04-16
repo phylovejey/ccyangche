@@ -187,14 +187,24 @@ function getbannerrow(h){
     var btnedit = document.createElement('input'); 
     btnedit.setAttribute('type','button'); //type="button"  
 	btnedit.setAttribute('value','编辑');   
-    btnedit.setAttribute('id',h._id);      
-       
+    btnedit.setAttribute('id',h._id);         
     //编辑操作
     btnedit.onclick = function(){  
 		requestedit(4, this.id);
 	} 
- 
     edit.appendChild(btnedit);  
+
+   	var del = document.createElement('td');//创建第六列，操作列  
+     row.appendChild(del);  
+     var btndel = document.createElement('input'); 
+     btndel.setAttribute('type','button'); //type="button"     
+     btndel.setAttribute('id',h._id);      
+    //删除操作
+	btndel.setAttribute('value','删除');
+ 	btndel.onclick = function(){  
+		mydelete('/banner', this.id);
+	}  
+    del.appendChild(btndel); 
 
     return row; //返回tr数据      
 }
@@ -283,54 +293,49 @@ function getitemrow(h, flag){
      	btnedit.onclick = function(){  
 			requestedit(1, this.id);
 		} 
+
+		var del = document.createElement('td');//创建第7列 
+	     row.appendChild(del);  
+	     var btndel = document.createElement('input'); 
+	     btndel.setAttribute('type','button'); //type="button"  
+	     btndel.setAttribute('id',h._id);
+	    //删除操作
+		btndel.setAttribute('value','删除');
+	 	btndel.onclick = function(){  
+			mydelete("/item", this.id);
+		}  
+	    del.appendChild(btndel); 
      }
      else if(flag == "1") {
      	btnedit.setAttribute('value','添加');
-     	btnedit.onclick = function(){  
-			var banneritemids = document.getElementById('banneritemids');
-			if(banneritemids.value === ""){
-				banneritemids.value = this.id + ",";
-			}else{
-				if(banneritemids.value.indexOf(this.id) == -1){
-					banneritemids.value = banneritemids.value + this.id + ",";
-				}else{
-					alert("该商品已添加");
-					return;
-				}
+     	btnedit.onclick = function() {  
+			var itemid = document.getElementById('itemid');
+			if(itemid.value === this.id) {
+				alert("该商品已添加");
+				return;
 			}
-			var banneritemnames = document.getElementById('banneritemnames');
-			if(banneritemnames.value === ""){
-				banneritemnames.value = this.getAttribute("itemname") + ",";
-			}else{
-				banneritemnames.value = banneritemnames.value + this.getAttribute("itemname") + ",";
+			else {
+				itemid.value = this.id;
 			}
+
+			var itemname = document.getElementById('itemname');
+			itemname.value = this.getAttribute("itemname");
+
 			addItemToBanner(this.getAttribute("itemname"), this.id);
 		} 	
      }
  
      edit.appendChild(btnedit);
 
-     var del = document.createElement('td');//创建第7列 
-     row.appendChild(del);  
-     var btndel = document.createElement('input'); 
-     btndel.setAttribute('type','button'); //type="button"  
-     btndel.setAttribute('id',h._id);
-    //删除操作
-	btndel.setAttribute('value','删除');
- 	btndel.onclick = function(){  
-		mydelete("/item", this.id);
-	}  
-    del.appendChild(btndel); 
-
     return row; //返回tr数据      
 }      
 
-function removeitem(item){
+function removeitem(item) {
     var itemname = item.getAttribute('itemname');
 	var itemid = item.getAttribute('itemid');
-	var result = confirm("是否移除该商品?")
+	var result = confirm("是否移除该商品?");
 
-	if(result){
+	if(result) {
 		removeItemFromBanner(itemname, itemid);
 	}
 }
@@ -347,12 +352,12 @@ function addItemToBanner(itemname, itemid){
 
     item.innerHTML = itemname;
 
-    item.onclick = function(){
+    item.onclick = function() {
     	var itemname = this.getAttribute('itemname');
     	var itemid = this.getAttribute('itemid');
-    	var result = confirm("是否移除该商品?")
+    	var result = confirm("是否移除该商品?");
 
-    	if(result){
+    	if(result) {
     		removeItemFromBanner(itemname, itemid);
     	}
     }
@@ -360,13 +365,7 @@ function addItemToBanner(itemname, itemid){
     item_list.appendChild(item);  
 }
 
-function removeItemFromBanner(itemname, itemid){
-	var banneritemids = document.getElementById('banneritemids');
-	var banneritemnames = document.getElementById('banneritemnames');
-	
-	banneritemids.value = banneritemids.value.replace(itemid+",", "");
-	banneritemnames.value = banneritemnames.value.replace(itemname+",", "");
-
+function removeItemFromBanner(itemname, itemid) {
 	var item_list = document.getElementById('item_list');
 	var item = document.getElementById(itemid);
 	item_list.removeChild(item);
