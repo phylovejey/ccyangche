@@ -120,6 +120,10 @@ function getbannerhead(){
 	bannername.innerHTML = "Banner名称"; //填充数据  
 	row.appendChild(bannername);  
       
+    var itemname = document.createElement('td'); //创建第二列banner名称  
+	itemname.innerHTML = "商品名称"; //填充数据  
+	row.appendChild(itemname);
+
     return row; //返回tr数据      
 }
 
@@ -181,6 +185,10 @@ function getbannerrow(h){
 	var bannername = document.createElement('td');//创建第二列Banner名称  
 	bannername.innerHTML = h.bannername;  
 	row.appendChild(bannername);  
+
+	var itemname = document.createElement('td');//创建第二列Banner名称  
+	itemname.innerHTML = h.itemname;  
+	row.appendChild(itemname);
 
 	var edit = document.createElement('td');  
     row.appendChild(edit);  
