@@ -1,3 +1,14 @@
+onload = function() {
+	var select = document.getElementById('select');
+	if(select != null) {
+		select.options[select.getAttribute("status")].selected = true;
+	}
+	var select1 = document.getElementById('select1');
+	if(select1 != null) {
+		select1.options[select1.getAttribute("status")].selected = true;
+	}
+}
+
 function search(){
 	var obj = {
 		target:$("#selecttarget").val(),
