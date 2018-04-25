@@ -51,10 +51,6 @@
             			<div class="well1 white">
             			<form action='/item' method='post' id="itemform" class="form-floating ng-pristine ng-invalid ng-invalid-required ng-valid-email ng-valid-url ng-valid-pattern" novalidate="novalidate" ng-submit="submit()">
 							<fieldset>
-                                <div class="form-group" style="display:none;">
-                                    <label class="control-label">商品ID</label>
-                                    <input type="text" name="_id" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= item._id %>>
-                                </div>
 								<div class="form-group">
 									<label class="control-label">商品名称</label>
               						<input type="text" name="name" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= item.name %>>
@@ -64,44 +60,12 @@
                                     <input type="text" name="briefDes" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.name" required="" value=<%= item.briefDes %>>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">商品现价</label>
-                                    <input type="text" name="normalprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.normalprice %>>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">商品团购价</label>
-                                    <input type="text" name="agentprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.agentprice %>>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">商品小图</label>
-                                    <input type="url" name="overviewImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.overviewImage %>>
-                                </div>
-                                <div class="form-group">
                                     <label class="control-label">商品ICON</label>
                                     <input type="url" name="iconImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.iconImage %>>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label">商品大图</label>
-                                    <input type="url" name="innerImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.innerImage %>>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">商品详情图</label>
-                                    <input type="url" name="itemDetailImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.itemDetailImage %>>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">销量</label>
-                                    <input type="text" name="sales" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[0-9]/" required="" readonly="readonly" value=<%= item.sales %>>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">评分</label>
-                                    <input type="text" name="rating" class="form-control1 ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="model.number" ng-pattern="/[1-5]/" required="" readonly="readonly" value=<%= item.rating %>>
-                                </div>
-                                <div class="form-group filled">
-                                    <label class="control-label">销售状态</label>
-                                    <select name="status" id="select1" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="" status=<%= item.status %>>
-                                        <option value=0>正常</option>
-                                        <option value=1>已售罄</option>
-                                        <option value=2>下架</option>
-                                    </select>
+                                    <label class="control-label">商品小图</label>
+                                    <input type="url" name="overviewImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.overviewImage %>>
                                 </div>
                                 <div class="form-group filled">
                                     <label class="control-label">商品分类</label>
@@ -111,6 +75,42 @@
                                         <option value=2>新鲜果蔬</option>
                                         <option value=3>特色农产</option>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品单位</label>
+                                    <input type="url" name="unit" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.unit %>>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品现价</label>
+                                    <input type="text" name="normalprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.normalprice %>>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品拼团价</label>
+                                    <input type="text" name="agentprice" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.agentprice %>>
+                                </div>
+                                <div class="form-group filled">
+                                    <label class="control-label">销售状态</label>
+                                    <select name="status" id="select1" class="form-control1 ng-invalid ng-invalid-required" ng-model="model.select" required="" status=<%= item.status %>>
+                                        <option value=0>正常</option>
+                                        <option value=1>已售罄</option>
+                                        <option value=2>下架</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">显示库存</label>
+                                    <input type="text" name="showinventory" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.showinventory %>>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">真实库存</label>
+                                    <input type="text" name="realinventory" class="form-control1 ng-invalid ng-invalid-required ng-touched" ng-model="model.number" required="" value=<%= item.realinventory %>>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品大图</label>
+                                    <input type="url" name="innerImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.innerImage %>>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">商品详情图</label>
+                                    <input type="url" name="itemDetailImage" class="form-control1 ng-invalid ng-valid-url ng-invalid-required ng-touched" ng-model="model.url" required="" value=<%= item.itemDetailImage %>>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">提交</button>

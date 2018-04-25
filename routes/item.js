@@ -27,22 +27,19 @@ router.get('/:itemid', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    console.log("phy body ", req.body);
-    
     if(!req.cookies.user || req.cookies.user.identity != 0){
         return res.render('login', { title: '买鲜后台管理系统' });
     }
 
     req.body.innerImage = req.body.innerImage.split(",");
     req.body.itemDetailImage = req.body.itemDetailImage.split(",");
-    itemlists.findOneAndUpdate({name:req.body.name}, req.body, {new:true,upsert:true})
+    itemlists.findOneAndUpdate({name:req.body.name}, {$set:req.body}, {new:true,upsert:true})
     .then((result) => {
         return res.send({status:1});
     }, (err) => next(err))
     .catch((err) => next(err));
 });
 
-//删除代理
 router.delete('/', function(req, res, next){
     if(!req.cookies.user || req.cookies.user.identity != 0){
         return res.render('login', { title: '买鲜后台管理系统' });

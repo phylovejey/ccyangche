@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-require('mongoose-currency').loadType(mongoose);
-const Currency = mongoose.Types.Currency;
 
 const itemSchema = new Schema({
 	name: {
@@ -13,16 +11,20 @@ const itemSchema = new Schema({
 		type: String,
 		required: true
 	},
-	overviewImage: {
-		type: String,
-		required: true
-	},
 	iconImage: {
+		type: String,
+		default: ''
+	},
+	overviewImage: {
 		type: String,
 		required: true
 	},
 	category: {
 		type: Number,
+		required: true
+	},
+	unit: {
+		type: String,
 		required: true
 	},
 	sales:{
@@ -35,18 +37,28 @@ const itemSchema = new Schema({
 		max: 5,
 		default: 5
 	},
-	status:{
-		type: Number,
-		min: 0,
-		max: 2,
-		default: 0
-	},
 	normalprice: {
 		type: Number,
 		min: 0,
 		required: true
 	},
 	agentprice: {
+		type: Number,
+		min: 0,
+		required: true
+	},
+	status: {
+		type: Number,
+		min: 0,
+		max: 2,
+		default: 0
+	},
+	showinventory: {
+		type: Number,
+		min: 0,
+		required: true
+	},
+	realinventory: {
 		type: Number,
 		min: 0,
 		required: true
