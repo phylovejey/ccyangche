@@ -23,6 +23,10 @@ const itemSchema = new Schema({
 		type: Number,
 		required: true
 	},
+	groupnum: {
+		type: Number,
+		default: 0
+	},
 	unit: {
 		type: String,
 		required: true
