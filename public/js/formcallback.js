@@ -57,7 +57,7 @@ function mydelete(_url, _id){
 function requestedit(target, id){
 	var url = "/item"
 	if(target == 2) {
-
+		url = "/order"
 	}
 	else if(target == 3) {
 		url = "/agent"
@@ -74,7 +74,7 @@ function showsearchresult(target, data){
 		showitemreuslt(data);
 	}
 	else if(target == 2) {
-
+		showorderresult(data);
 	}
 	else if(target == 3) {
 		showagentreuslt(data);
@@ -104,6 +104,18 @@ function showagentreuslt(data){
 
     for(var i = 0;i < data.length; i++){
     	var trow = getagentrow(data[i], tbody.getAttribute("flag"));
+    	tbody.appendChild(trow);  
+    }
+}
+
+function showorderresult(data){
+	var thead = document.getElementById('tablehead');
+	thead.appendChild(getorderhead());
+
+	var tbody = document.getElementById('tablebody');
+
+    for(var i = 0;i < data.length; i++){
+    	var trow = getorderrow(data[i], tbody.getAttribute("flag"));
     	tbody.appendChild(trow);  
     }
 }
@@ -156,6 +168,44 @@ function getagenthead(){
 	var level = document.createElement('td');//创建第四列代理等级  
 	level.innerHTML = "代理等级";  
 	row.appendChild(level); 
+
+    return row; //返回tr数据      
+}
+
+function getorderhead(){  
+	var row = document.createElement('tr'); //创建行  
+       
+	var consumername = document.createElement('td'); //创建第一列商品名称  
+	consumername.innerHTML = "购买人"; //填充数据  
+	row.appendChild(consumername); //加入行  ，下面类似  
+       
+	var purchaseitem = document.createElement('td');//创建第二列商品原价  
+	purchaseitem.innerHTML = "购买商品";  
+	row.appendChild(purchaseitem);  
+       
+	var total_fee = document.createElement('td');//创建第三列订单价格  
+	total_fee.innerHTML = "购买价格";  
+	row.appendChild(total_fee);
+
+	var quanlity = document.createElement('td');//创建第四列购买数量  
+	quanlity.innerHTML = "购买数量";  
+	row.appendChild(quanlity); 
+
+	var order_time = document.createElement('td');//创建第五列下单时间
+	order_time.innerHTML = "下单时间";  
+	row.appendChild(order_time);
+
+	var status = document.createElement('td');//创建第六列订单状态  
+	status.innerHTML = "订单状态";  
+	row.appendChild(status);  
+
+	var purchasemode = document.createElement('td');//创建第七列购买方式  
+	purchasemode.innerHTML = "购买方式";  
+	row.appendChild(purchasemode); 
+
+	var takemode = document.createElement('td');//创建第八列收货方式
+	takemode.innerHTML = "收货方式";  
+	row.appendChild(takemode);
 
     return row; //返回tr数据      
 }
@@ -256,7 +306,6 @@ function getagentrow(h, flag){
      //编辑操作
 	btnedit.setAttribute('value','编辑');
  	btnedit.onclick = function(){ 
- 		alert(this.id);
 		requestedit(3, this.id);
 	}
 	edit.appendChild(btnedit);
@@ -275,6 +324,56 @@ function getagentrow(h, flag){
 
     return row; //返回tr数据      
 }   
+
+function getorderrow(h, flag){  
+	var row = document.createElement('tr'); //创建行  
+    
+    var consumername = document.createElement('td'); //创建第一列购买人  
+	consumername.innerHTML = h.consumer.nickName; //填充数据  
+	row.appendChild(consumername); //加入行  ，下面类似
+
+	var itemname = document.createElement('td'); //创建第二列商品名称  
+	itemname.innerHTML = h.purchaseitem.name; //填充数据  
+	row.appendChild(itemname); //加入行  ，下面类似  
+    
+    var total_fee = document.createElement('td');//创建第三列订单价格  
+	total_fee.innerHTML = h.total_fee/100;  
+	row.appendChild(total_fee);
+
+	var itemquanity = document.createElement('td');//创建第四列购买数量  
+	itemquanity.innerHTML = h.itemquanity;  
+	row.appendChild(itemquanity);
+
+	var order_timestamp = document.createElement('td');//创建第五列下单时间  
+	order_timestamp.innerHTML = new Date(h.order_timestamp * 1000).toLocaleString(); //获取一个时间对象 
+	row.appendChild(order_timestamp);
+
+	var status = document.createElement('td');//创建第六列订单状态  
+	status.innerHTML = h.status;  
+	row.appendChild(status);  
+
+	var purchasemode = document.createElement('td');//创建第七列购买方式  
+	purchasemode.innerHTML = h.purchasemode;  
+	row.appendChild(purchasemode); 
+
+	var takemode = document.createElement('td');//创建第八列收货方式
+	takemode.innerHTML = h.takemode;  
+	row.appendChild(takemode);
+
+	 var edit = document.createElement('td');//创建第九列，操作列  
+     row.appendChild(edit);  
+     var btnedit = document.createElement('input'); 
+     btnedit.setAttribute('type','button'); //type="button"     
+     btnedit.setAttribute('id',h._id);          
+	btnedit.setAttribute('value','编辑');
+ 	btnedit.onclick = function(){  
+		requestedit(2, this.id);
+	} 
+
+    edit.appendChild(btnedit);
+
+    return row; //返回tr数据      
+}
 
 function getitemrow(h, flag){  
 	var row = document.createElement('tr'); //创建行  
