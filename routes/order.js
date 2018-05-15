@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const orders = require('../models/orders');
+const itemlists = require('../models/itemlists');
+const users = require('../models/users');
 
 //订单管理
 router.get('/', function(req, res, next) {
@@ -23,9 +25,9 @@ router.get('/:orderid', function(req, res, next) {
         return res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    orders.findById(req.params.orderid)
+    orders.findById(req.params.orderid).populate('purchaseitem').populate('consumer')
     .then((order) => {
-        return res.render('item',{zonglan:"/index", status:1, item:item});
+        return res.render('orderdetail',{zonglan:"/index", status:1, order:order});
     }, (err) => next(err))
     .catch((err) => next(err));
 });
@@ -34,19 +36,13 @@ router.post('/', function(req, res, next) {
     if(!req.cookies.user || req.cookies.user.identity != 0){
         return res.render('login', { title: '买鲜后台管理系统' });
     }
+    req.body.status = parseInt(req.body.status);
 
-    req.body.innerImage = req.body.innerImage.split(",");
-    req.body.itemDetailImage = req.body.itemDetailImage.split(",");
-    itemlists.findOneAndUpdate({name:req.body.name}, {$set:req.body}, {new:true,upsert:true})
+    orders.findOneAndUpdate({order_no:req.body.order_no}, {$set:req.body}, {new:true}).populate('purchaseitem').populate('consumer')
     .then((result) => {
-        return res.send({status:1});
+        return res.render('orderdetail',{zonglan:"/index", status:1, order:result});
     }, (err) => next(err))
     .catch((err) => next(err));
-});
-
-/* 更新订单. */
-router.post('/', function(req, res, next) {
-    console.log("phy body ", req.body);
 });
 
 module.exports = router;

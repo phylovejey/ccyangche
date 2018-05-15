@@ -7,6 +7,25 @@ onload = function() {
 	if(select1 != null) {
 		select1.options[select1.getAttribute("status")].selected = true;
 	}
+	var orderstatusselect = document.getElementById('orderstatusselect');
+	if(orderstatusselect != null) {
+		orderstatusselect.options[orderstatusselect.getAttribute("status")].selected = true;
+	}
+	var ordertakeselect = document.getElementById('ordertakeselect');
+	if(ordertakeselect != null) {
+		ordertakeselect.options[ordertakeselect.getAttribute("status")].selected = true;
+	}
+	var ordertimestamp = document.getElementById('ordertimestamp');
+	if(ordertimestamp != null) {
+		var ordertime = ordertimestamp.getAttribute("timestamp");
+		var orderdate = new Date(ordertime * 1000);
+
+		var year = orderdate.getFullYear();
+		var month = orderdate.getMonth()+1<10?"0"+(orderdate.getMonth()+1):orderdate.getMonth();
+		var day = orderdate.getDate()<10?"0"+orderdate.getDate():orderdate.getDate();
+
+		ordertimestamp.value = year + "-" + month + "-" + day;
+	}
 }
 
 function search(){
