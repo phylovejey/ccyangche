@@ -367,16 +367,17 @@ function getorderrow(h, flag){
 	order_timestamp.innerHTML = new Date(h.order_timestamp * 1000).toLocaleString(); //获取一个时间对象 
 	row.appendChild(order_timestamp);
 
+	var st = new Array("待付款","待成团","待收货","已完成");
 	var status = document.createElement('td');//创建第六列订单状态  
-	status.innerHTML = h.status;  
+	status.innerHTML = st[h.status];  
 	row.appendChild(status);  
 
 	var purchasemode = document.createElement('td');//创建第七列购买方式  
-	purchasemode.innerHTML = h.purchasemode;  
+	purchasemode.innerHTML = h.purchasemode == 0?"拼团购买":"单独购买";  
 	row.appendChild(purchasemode); 
 
 	var takemode = document.createElement('td');//创建第八列收货方式
-	takemode.innerHTML = h.takemode;  
+	takemode.innerHTML = h.takemode == 0?"快递":"自提";  
 	row.appendChild(takemode);
 
 	 var edit = document.createElement('td');//创建第九列，操作列  

@@ -18,7 +18,7 @@ var order = require('./routes/order');
 var banner = require('./routes/banner');
 var search = require('./routes/search');
 
-var mongoose = require('mongoose').set('debug', true);
+var mongoose = require('mongoose').set('debug', false);
 mongoose.Promise = require('bluebird');
 
 const connect = mongoose.connect('mongodb://mxphy:mxccyangche1234!@localhost:24404/maixiandb');

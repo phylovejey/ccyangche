@@ -5,7 +5,6 @@ const admins = require('../models/admins');
 
 /* GET Login page. */
 router.get('/', function(req, res, next) {
-    console.log("GET Login Page.");
     res.render('login', { title: '买鲜后台管理系统' });
 });
 

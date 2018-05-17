@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
         res.render('login', { title: '买鲜后台管理系统' });
     }
 
-    console.log("Get Order page ", req.body);
     var data = 
     {
         zonglan:"/index"
